@@ -1,0 +1,14 @@
+MaterialDef Solid Block {
+	MaterialParameters {
+		Texture2D ColorMap
+	}
+	
+	Technique {
+		VertexShader GLSL120: /assets/shaders/SolidBlock.vert
+		FragmentShader GLSL120: /assets/shaders/SolidBlock.frag
+		
+		WorldParameters {
+			WorldViewProjectionMatrix
+		}
+	}
+}
