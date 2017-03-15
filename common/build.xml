@@ -1,0 +1,58 @@
+<project name="quadracoatl-common" default="dist" basedir=".">
+	<property name="version" value="prototype-3" />
+	
+	<path id="libs">
+		<fileset dir="libs/jopt-simple/">
+			<include name="jopt-simple-5.0.1.jar" />
+		</fileset>
+		<fileset dir="libs/kryonet/">
+			<include name="kryonet-3.0.0.jar" />
+		</fileset>
+		<fileset dir="libs/luaj/">
+			<include name="bcel-5.2.jar" />
+			<include name="luaj-jse-3.0.1.jar" />
+		</fileset>
+		<fileset dir="libs/trove/">
+			<include name="trove-3.1a1.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="build/" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="build/" />
+		<mkdir dir="build/classes/" />
+		<mkdir dir="build/dist/" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac
+			srcdir="src/"
+			destdir="build/classes/"
+			source="1.8"
+			includeantruntime="false"
+			debug="true"
+			debuglevel="lines,vars,source">
+			
+			<classpath refid="libs" />
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar
+			jarfile="build/dist/${ant.project.name}-${version}.jar"
+			basedir="build/classes/" />
+	</target>
+	
+	<target name="dist" depends="jar">
+		<copy todir="build/dist/libs/" flatten="true">
+			<path refid="libs" />
+			<fileset dir="libs/">
+				<include name="**/*.txt" />
+			</fileset>
+		</copy>
+	</target>
+</project>
+
