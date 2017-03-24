@@ -5,7 +5,13 @@ Quadracoatl is an engine for moddable, multiplayer bloxel games created with
 Lua.
 
 Its goal is to provide a feature rich platform for creating and powering
-bloxel games.
+bloxel games of all kinds with the following goals:
+
+ * Multiplayer by default, Singleplayer is "just offline/direct multiplayer".
+ * Core API written in Java, scriptable in Lua.
+ * Games are moddable by default, a "game" is just a fancy package for mods.
+ * Client can connect to any server, the lient receives all necessary
+   information/data/logic from the server upon connecting to it.
 
 
 License
@@ -21,7 +27,7 @@ Components
 Quadracoatl is powered by the following components:
 
  * [Java 1.8+][java], main platform
- * [jMonkeyEngine][j-monkey-engine], main engine
+ * [jMonkeyEngine][jmonkeyengine], main engine
    * [LWJGL][lwjgl-github], OpenGL layer
  * [KryoNet][kryonet-github], Network layer
    * [Kryo][kryo-github], serialization system
@@ -84,7 +90,7 @@ A realm defines one world and contains chunks.
 
 
  [java]: https://www.java.com/
- [j-monkey-engine]: https://jmonkeyengine.org/
+ [jmonkeyengine]: https://jmonkeyengine.org/
  [kryo-github]: https://github.com/EsotericSoftware/kryo
  [kryonet-github]: https://github.com/EsotericSoftware/kryonet
  [luaj-sourceforge]: https://sourceforge.net/projects/luaj/
