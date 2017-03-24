@@ -1,0 +1,23 @@
+How to contribute
+=================
+
+
+Basic rules
+-----------
+
+ * All text files are to be UTF-8 encoded.
+ * All text files are to use Unix line endings (line feed).
+
+
+Sending patches
+---------------
+
+Patches can either be send by email or GitLab.
+
+
+Commit messages
+---------------
+
+Commit messages are to be in the Git format. They should start with the issue
+number, if there is any.
+
