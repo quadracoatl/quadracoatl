@@ -1,0 +1,20 @@
+MaterialDef Cube {
+	MaterialParameters {
+		Color Color
+		Int ColorBlendMode
+		Texture2D ColorMap
+		Vector4Array LightsColors
+		Int LightsCount
+		Vector3Array LightsDirections
+		IntArray LightsTypes
+	}
+	
+	Technique {
+		VertexShader GLSL120: /assets/shaders/blocks/Cube.vert
+		FragmentShader GLSL120: /assets/shaders/blocks/Cube.frag
+		
+		WorldParameters {
+			WorldViewProjectionMatrix
+		}
+	}
+}

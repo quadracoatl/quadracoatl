@@ -1,0 +1,76 @@
+<project name="quadracoatl-jme-client" default="dist" basedir=".">
+	<property name="version" value="prototype-2" />
+	
+	<path id="common-libs">
+		<fileset dir="../common/build/dist/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<path id="libs">
+		<fileset dir="libs/jme/">
+			<include name="jme3-core.jar" />
+			<include name="jme3-desktop.jar" />
+			<include name="jme3-efects.jar" />
+			<include name="jme3-lwjgl3.jar" />
+			<include name="lwjgl-platform-3.0.0b-natives-linux.jar" />
+			<include name="lwjgl-3.0.0b.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="build/" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="build/" />
+		<mkdir dir="build/classes/" />
+		<mkdir dir="build/dist/" />
+	</target>
+	
+	<target name="common">
+		<ant
+			antfile="../common/build.xml"
+			target="dist"
+			dir="../common/" />
+	</target>
+	
+	<target name="compile" depends="init, common">
+		<javac
+			srcdir="src"
+			destdir="build/classes/"
+			source="1.8"
+			includeantruntime="false"
+			debug="true"
+			debuglevel="lines,vars,source">
+			
+			<classpath refid="common-libs" />
+			<classpath refid="libs" />
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar
+			jarfile="build/dist/${ant.project.name}-${version}.jar"
+			basedir="build/classes/">
+			
+			<fileset dir="src/">
+				<exclude name="*.java" />
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="dist" depends="jar">
+		<copy todir="build/dist/libs" flatten="true">
+			<fileset dir="../common/build/dist/">
+				<include name="**/*.jar" />
+				<include name="**/*.txt" />
+			</fileset>
+			
+			<path refid="libs" />
+			<fileset dir="libs">
+				<include name="**/*.txt" />
+			</fileset>
+		</copy>
+	</target>
+</project>
+

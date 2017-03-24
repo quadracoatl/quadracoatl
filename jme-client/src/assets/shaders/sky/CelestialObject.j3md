@@ -1,0 +1,21 @@
+MaterialDef CelestialObject {
+	MaterialParameters {
+		Color Color
+		Texture2D ColorMap
+		Int ColorBlendMode
+	}
+	
+	Technique {
+		VertexShader GLSL100: /assets/shaders/sky/CelestialObject.vert
+		FragmentShader GLSL100: /assets/shaders/sky/CelestialObject.frag
+		
+		WorldParameters {
+			WorldViewProjectionMatrix
+		}
+		
+		RenderState {
+			DepthWrite Off
+			DepthFunc Equal
+		}
+	}
+}

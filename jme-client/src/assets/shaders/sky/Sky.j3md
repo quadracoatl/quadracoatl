@@ -1,0 +1,24 @@
+MaterialDef Sky Plane {
+	MaterialParameters {
+		Color Color
+		Int ColorBlendMode
+		TextureCubeMap Texture
+		Vector3 NormalScale
+	}
+	
+	Technique {
+		VertexShader GLSL100: assets/shaders/sky/Sky.vert
+		FragmentShader GLSL100: assets/shaders/sky/Sky.frag
+		
+		WorldParameters {
+			ViewMatrix
+			ProjectionMatrix
+			WorldMatrix
+		}
+		
+		RenderState {
+			DepthWrite Off
+			DepthFunc Equal
+		}
+	}
+}
