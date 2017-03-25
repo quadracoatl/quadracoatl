@@ -123,8 +123,12 @@ public class Configuration {
 		}
 		
 		try {
-			if (value.startsWith(HEX_PREFIX)) {
-				return Integer.parseInt(value.substring(HEX_PREFIX.length()), 16);
+			if (value.startsWith(BINARY_PREFIX)) {
+				return Integer.parseUnsignedInt(value.substring(BINARY_PREFIX.length()), 2);
+			} else if (value.startsWith(HEX_PREFIX)) {
+				return Integer.parseUnsignedInt(value.substring(HEX_PREFIX.length()), 16);
+			} else if (value.startsWith(OCTAL_PREFIX)) {
+				return Integer.parseUnsignedInt(value.substring(OCTAL_PREFIX.length()), 8);
 			} else {
 				return Integer.parseInt(value);
 			}
@@ -158,11 +162,11 @@ public class Configuration {
 		
 		try {
 			if (value.startsWith(BINARY_PREFIX)) {
-				return Long.parseLong(value.substring(HEX_PREFIX.length()), 2);
+				return Long.parseUnsignedLong(value.substring(BINARY_PREFIX.length()), 2);
 			} else if (value.startsWith(HEX_PREFIX)) {
-				return Long.parseLong(value.substring(HEX_PREFIX.length()), 16);
+				return Long.parseUnsignedLong(value.substring(HEX_PREFIX.length()), 16);
 			} else if (value.startsWith(OCTAL_PREFIX)) {
-				return Long.parseLong(value.substring(HEX_PREFIX.length()), 8);
+				return Long.parseUnsignedLong(value.substring(OCTAL_PREFIX.length()), 8);
 			} else {
 				return Long.parseLong(value);
 			}
