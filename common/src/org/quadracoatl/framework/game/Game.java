@@ -53,6 +53,10 @@ public class Game {
 		}
 	}
 	
+	public Path getDirectory() {
+		return directory;
+	}
+	
 	public String getDisplayName() {
 		return displayName;
 	}
