@@ -57,6 +57,10 @@ public class Configuration {
 		load();
 	}
 	
+	public boolean exists(String key) {
+		return properties.containsKey(key);
+	}
+	
 	public boolean getBoolean(String key) {
 		return getBoolean(key, false);
 	}

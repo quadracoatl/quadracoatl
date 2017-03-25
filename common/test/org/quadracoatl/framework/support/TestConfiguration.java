@@ -48,6 +48,12 @@ public class TestConfiguration extends AbstractFileHandlingTest {
 	}
 	
 	@Test
+	public void testExists() {
+		Assert.assertFalse(configuration.exists("non-existent"));
+		Assert.assertTrue(configuration.exists("string"));
+	}
+	
+	@Test
 	public void testGetBoolean() {
 		Assert.assertFalse(configuration.getBoolean("non-existent"));
 		Assert.assertTrue(configuration.getBoolean("non-existent", true));
