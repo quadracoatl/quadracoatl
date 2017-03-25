@@ -19,8 +19,6 @@
 
 package org.quadracoatl.environments;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,7 +29,6 @@ import org.quadracoatl.framework.common.Client;
 import org.quadracoatl.framework.cosmos.Cosmos;
 import org.quadracoatl.framework.entities.changes.EntityChangeBatch;
 import org.quadracoatl.framework.game.Game;
-import org.quadracoatl.framework.game.GameManager;
 import org.quadracoatl.framework.mod.Mod;
 import org.quadracoatl.framework.realm.Realm;
 import org.quadracoatl.interlayer.parts.CosmosPart;
@@ -42,23 +39,15 @@ import org.quadracoatl.scripting.ScriptingFeature;
 import org.quadracoatl.scripting.lua.LuaEnvironment;
 
 public class ServerEnvironment extends AbstractThreadedUpdatable {
-	private Path baseDirectory = null;
 	private Set<Client> clients = new HashSet<Client>();
 	private Cosmos cosmos = null;
 	private Game game = null;
-	private GameManager gameManager = null;
 	private ScriptEnvironment scriptEnvironment = null;
 	
-	public ServerEnvironment(Path baseDirectory) {
+	public ServerEnvironment(Game game) {
 		super("server", 16);
 		
-		this.baseDirectory = baseDirectory;
-		
-		gameManager = new GameManager();
-		gameManager.gatherGames(Paths.get(baseDirectory.toString(), "games"));
-		
-		// TODO Hardcoded game here.
-		game = gameManager.getGames().get("quadraxample");
+		this.game = game;
 		
 		cosmos = new Cosmos();
 	}
@@ -98,6 +87,9 @@ public class ServerEnvironment extends AbstractThreadedUpdatable {
 	protected void init() {
 		super.init();
 		
+		logger.info("Game: ", game.getDisplayName());
+		logger.info("Directory: ", game.getDirectory());
+		
 		scriptEnvironment = new LuaEnvironment();
 		scriptEnvironment.setCosmos(cosmos);
 		scriptEnvironment.setScheduler(scheduler);
@@ -105,6 +97,7 @@ public class ServerEnvironment extends AbstractThreadedUpdatable {
 		scriptEnvironment.enableFeatures(ScriptingFeature.ALL);
 		
 		for (Mod mod : game.getModManager().getModsInLoadOrder()) {
+			logger.info("Loading mod: " + mod.getName());
 			scriptEnvironment.load(mod);
 		}
 	}

@@ -19,10 +19,10 @@
 
 package org.quadracoatl.jmeclient;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.quadracoatl.environments.ServerEnvironment;
+import org.quadracoatl.framework.game.Game;
 import org.quadracoatl.framework.logging.LogLevel;
 import org.quadracoatl.framework.logging.LoggerFactory;
 import org.quadracoatl.framework.support.Arguments;
@@ -39,6 +39,7 @@ public final class Main {
 	
 	public static final void main(String[] args) {
 		Arguments arguments = new Arguments();
+		arguments.addString("game", "../../quadraxample/");
 		arguments.addString("mode", "single");
 		arguments.addString("path", ".");
 		arguments.addString("server-address", "localhost");
@@ -47,14 +48,14 @@ public final class Main {
 		
 		arguments.process(args);
 		
-		Path baseDirectory = Paths.get(arguments.getString("path"));
+		Game game = new Game(Paths.get(arguments.getString("game")));
 		
 		Interlayer interlayer = null;
 		
 		LoggerFactory.setLogLevel(LogLevel.WARN);
 		
 		if (arguments.getString("mode").equals("single")) {
-			ServerEnvironment serverEnvironment = new ServerEnvironment(baseDirectory);
+			ServerEnvironment serverEnvironment = new ServerEnvironment(game);
 			interlayer = new CloningInterlayer(serverEnvironment);
 		} else if (arguments.getString("mode").equals("multi")) {
 			interlayer = new KryonetClient(

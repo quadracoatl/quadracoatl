@@ -19,10 +19,10 @@
 
 package org.quadracoatl.server;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.quadracoatl.environments.ServerEnvironment;
+import org.quadracoatl.framework.game.Game;
 import org.quadracoatl.framework.logging.LogLevel;
 import org.quadracoatl.framework.logging.Logger;
 import org.quadracoatl.framework.logging.LoggerFactory;
@@ -40,15 +40,15 @@ public final class Main {
 		LoggerFactory.setLogLevel(LogLevel.TRACE);
 		
 		Arguments arguments = new Arguments();
-		arguments.addString("path", ".");
+		arguments.addString("game", "../../quadraxample/");
 		arguments.addInteger("tcp-port", 7907);
 		arguments.addInteger("udp-port", 7908);
 		
 		arguments.process(args);
 		
-		Path baseDirectory = Paths.get(arguments.getString("path"));
+		Game game = new Game(Paths.get(arguments.getString("game")));
 		
-		ServerEnvironment serverEnvironment = new ServerEnvironment(baseDirectory);
+		ServerEnvironment serverEnvironment = new ServerEnvironment(game);
 		serverEnvironment.start();
 		
 		KryonetServer server = new KryonetServer(

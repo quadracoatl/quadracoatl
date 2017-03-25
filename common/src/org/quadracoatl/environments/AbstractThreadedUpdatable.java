@@ -28,9 +28,9 @@ import org.quadracoatl.framework.scheduler.Scheduler;
 
 public abstract class AbstractThreadedUpdatable {
 	protected List<Runnable> invokeNext = new ArrayList<>();
+	protected Logger logger = null;
 	protected volatile boolean running = false;
 	protected Scheduler scheduler = new Scheduler();
-	private Logger logger = null;
 	private String name = null;
 	private volatile boolean started = false;
 	private Thread thread = null;
@@ -112,9 +112,11 @@ public abstract class AbstractThreadedUpdatable {
 	}
 	
 	protected void destroy() {
+		logger.info("Destroying...");
 	}
 	
 	protected void init() {
+		logger.info("Initializing...");
 	}
 	
 	protected void update(long elapsedNanoSecondsSinceLastUpdate) {
@@ -132,8 +134,6 @@ public abstract class AbstractThreadedUpdatable {
 	private void runUpdateLoop() {
 		try {
 			logger.info("Starting.");
-			
-			logger.info("Init.");
 			
 			init();
 			
@@ -164,8 +164,6 @@ public abstract class AbstractThreadedUpdatable {
 			started = false;
 			
 			logger.info("Ending loop.");
-			
-			logger.info("Destroy.");
 			
 			destroy();
 			
