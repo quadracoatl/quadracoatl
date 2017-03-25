@@ -7,6 +7,41 @@ Basic rules
 
  * All text files are to be UTF-8 encoded.
  * All text files are to use Unix line endings (line feed).
+ * There are Eclipse projects added, configured and ready to be used.
+
+
+Member Sort Order
+-----------------
+
+Automatic formatting is enabled on the project, including formatting of the code
+and organizing the imports and members of the class. The used code formatter is
+attached to the repository as XML export, you must import it in Eclipse.
+
+Unfortunately, there is no per project setting for the sort order of the class
+members, you have to set it globally in the preferences:
+
+    Java -> Appearance -> Members Sort Order
+
+The order is as follows:
+
+ 1. Static Fields
+ 2. Fields
+ 3. Static Initializers
+ 4. Constructors
+ 5. Initializers
+ 6. Static Methods
+ 7. Methods
+ 8. Types
+
+The sort order for members in the same category is:
+
+ 1. Public
+ 2. Package
+ 3. Protected
+ 4. Private
+
+If you are unable to set these settings, please disable the automatic sorting in
+the project settings and sort them by hand according to these rules.
 
 
 Sending patches

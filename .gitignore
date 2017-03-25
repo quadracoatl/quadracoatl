@@ -1,0 +1,7 @@
+common/bin/
+common/build/
+jme-client/bin/
+jme-client/build/
+server/bin/
+server/build/
+

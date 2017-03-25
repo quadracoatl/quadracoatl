@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="libs/jme/jme3-core.jar" sourcepath="libs/jme/jme3-core-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/jme3-desktop.jar" sourcepath="libs/jme/jme3-desktop-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/jme3-effects.jar" sourcepath="libs/jme/jme3-effects-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl3/jme3-lwjgl3.jar" sourcepath="libs/jme/lwjgl3/jme3-lwjgl3-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl3/lwjgl-3.0.0b.jar" sourcepath="libs/jme/lwjgl3/lwjgl-3.0.0b-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl3/lwjgl-platform-3.0.0b-natives-linux.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl3/lwjgl-platform-3.0.0b-natives-osx.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl3/lwjgl-platform-3.0.0b-natives-windows.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/common"/>
+	<classpathentry kind="lib" path="/common/libs/trove/trove-3.1a1.jar" sourcepath="/common/libs/trove/trove-3.1a1-src.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

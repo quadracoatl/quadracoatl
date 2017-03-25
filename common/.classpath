@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="libs/jopt-simple/jopt-simple-5.0.1.jar" sourcepath="libs/jopt-simple/jopt-simple-5.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="libs/kryonet/kryonet-3.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/luaj/bcel-5.2.jar"/>
+	<classpathentry kind="lib" path="libs/luaj/luaj-jse-3.0.1.jar" sourcepath="libs/luaj/luaj-sources-3.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/trove/trove-3.1a1.jar" sourcepath="libs/trove/trove-3.1a1-src.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
