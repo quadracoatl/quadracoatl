@@ -2,6 +2,7 @@ common/bin/
 common/build/
 jme-client/bin/
 jme-client/build/
+jme-client/cache/
 server/bin/
 server/build/
 
