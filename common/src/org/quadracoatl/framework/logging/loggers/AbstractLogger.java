@@ -172,16 +172,20 @@ public abstract class AbstractLogger implements Logger {
 		if (object instanceof Throwable) {
 			Throwable throwable = (Throwable)object;
 			
-			logMessage.append("\n\t");
-			logMessage.append(throwable.toString());
-			
-			if (throwable.getStackTrace() != null) {
-				for (StackTraceElement stackTraceElement : throwable.getStackTrace()) {
-					logMessage.append("\n\t\t");
-					logMessage.append(stackTraceElement.toString());
+			while (throwable != null) {
+				logMessage.append("\n\t");
+				logMessage.append(throwable.toString());
+				
+				if (throwable.getStackTrace() != null) {
+					for (StackTraceElement stackTraceElement : throwable.getStackTrace()) {
+						logMessage.append("\n\t\t");
+						logMessage.append(stackTraceElement.toString());
+					}
+				} else {
+					logMessage.append("\n\t\tNo stacktrace available.");
 				}
-			} else {
-				logMessage.append("\n\t\tNo stacktrace available.");
+				
+				throwable = throwable.getCause();
 			}
 		} else {
 			logMessage.append(Objects.toString(object));
