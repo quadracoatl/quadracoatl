@@ -118,13 +118,15 @@ public class ChunkState extends AbstractAppState {
 	}
 	
 	private void enqueueNeighboursForRemeshing(Vector3i coordinate) {
+		LOGGER.info("Enqueuing neighbouring chunks for remeshing: ", coordinate);
+		
 		for (int x = coordinate.x - SURROUNDING_CHUNKS; x <= coordinate.x + SURROUNDING_CHUNKS; x++) {
 			for (int z = coordinate.z - SURROUNDING_CHUNKS; z <= coordinate.z + SURROUNDING_CHUNKS; z++) {
 				for (int y = coordinate.y - SURROUNDING_CHUNKS; y <= coordinate.y + SURROUNDING_CHUNKS; y++) {
 					if (x != coordinate.x
 							&& y != coordinate.y
 							&& z != coordinate.z) {
-						remeshStack.push(new Vector3i(x, y, z));
+						enqueueForRemeshing(new Vector3i(x, y, z));
 					}
 				}
 			}
