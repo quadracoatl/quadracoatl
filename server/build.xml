@@ -1,12 +1,11 @@
 <project name="quadracoatl-server" default="dist" basedir=".">
-	<property name="version" value="prototype-2" />
+	<property name="version" value="prototype-3" />
 	
 	<path id="common-libs">
 		<fileset dir="../common/build/dist/">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	<path id="libs" />
 	
 	<target name="clean">
 		<delete dir="build/" />
@@ -35,7 +34,6 @@
 			debuglevel="lines,vars,source">
 			
 			<classpath refid="common-libs" />
-			<classpath refid="libs" />
 		</javac>
 	</target>
 	
@@ -51,12 +49,8 @@
 				<include name="**/*.jar" />
 				<include name="**/*.txt" />
 			</fileset>
-			
-			<path refid="libs" />
-			<fileset dir="libs">
-				<include name="**/*.txt" />
-			</fileset>
 		</copy>
 	</target>
 </project>
+
 
