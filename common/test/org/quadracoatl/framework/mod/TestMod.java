@@ -20,46 +20,26 @@
 package org.quadracoatl.framework.mod;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.quadracoatl.testing.AbstractFileHandlingTest;
 
-public class TestMod {
-	private Path modDirectory = null;
-	private Path propertiesFile = null;
-	private Path testDirectory = null;
-	
-	@Before
-	public void setup() throws IOException {
-		testDirectory = Files.createTempDirectory("quadracoatl-unittest-mod-");
-		testDirectory.toFile().deleteOnExit();
-		
-		modDirectory = Paths.get(testDirectory.toString(), "test");
-		modDirectory.toFile().deleteOnExit();
-		
-		propertiesFile = Paths.get(modDirectory.toString(), "mod.properties");
-		propertiesFile.toFile().deleteOnExit();
-	}
-	
+public class TestMod extends AbstractFileHandlingTest {
 	@Test
 	public void testNameSanitization() throws IOException {
-		Files.createDirectory(modDirectory);
+		Path propertiesFile = createPath("./mods/test/mod.properties",
+				"name = Some ~ Highly $#%@*%$ Invalid Name");
 		
-		Files.write(propertiesFile, Arrays.asList(
-				"name = Some ~ Highly $#% Invalid Name"));
-		
-		Mod mod = new Mod(modDirectory);
-		Assert.assertEquals("Mod name is not as expected.", "Some___Highly_____Invalid_Name", mod.getName());
+		Mod mod = new Mod(propertiesFile.getParent());
+		Assert.assertEquals("Mod name is not as expected.", "Some___Highly_________Invalid_Name", mod.getName());
 	}
 	
 	@Test
 	public void testNonExistingDirectory() throws IOException {
-		Mod mod = new Mod(modDirectory);
+		Mod mod = new Mod(Paths.get("./mods/test/"));
 		
 		Assert.assertEquals("Mod name is not as expected.", "test", mod.getName());
 		Assert.assertEquals("Mod display name is not as expected.", "test", mod.getDisplayName());
@@ -68,9 +48,7 @@ public class TestMod {
 	
 	@Test
 	public void testNoPropertiesFile() throws IOException {
-		Files.createDirectory(modDirectory);
-		
-		Mod mod = new Mod(modDirectory);
+		Mod mod = new Mod(createPath("./mods/test/"));
 		
 		Assert.assertEquals("Mod name is not as expected.", "test", mod.getName());
 		Assert.assertEquals("Mod display name is not as expected.", "test", mod.getDisplayName());
@@ -79,14 +57,12 @@ public class TestMod {
 	
 	@Test
 	public void testWithPropertiesFile() throws IOException {
-		Files.createDirectory(modDirectory);
-		
-		Files.write(propertiesFile, Arrays.asList(
+		Path propertiesFile = createPath("./mods/test/mod.properties",
 				"name = aTest",
 				"displayName = This is the test",
-				"requires = a b c"));
+				"requires = a b c");
 		
-		Mod mod = new Mod(modDirectory);
+		Mod mod = new Mod(propertiesFile.getParent());
 		Assert.assertEquals("Mod name is not as expected.", "aTest", mod.getName());
 		Assert.assertEquals("Mod display name is not as expected.", "This is the test", mod.getDisplayName());
 		Assert.assertFalse("Mod requirements are empty.", mod.getRequires().isEmpty());
