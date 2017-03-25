@@ -20,6 +20,8 @@
 package org.quadracoatl.framework.logging.loggers;
 
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 import org.quadracoatl.framework.logging.LogLevel;
@@ -31,6 +33,7 @@ import org.quadracoatl.framework.logging.LoggerFactory;
  * easy to log messages to a stream.
  */
 public abstract class AbstractLogger implements Logger {
+	protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 	protected LogLevel logLevel = null;
 	protected String name = null;
 	
@@ -205,6 +208,10 @@ public abstract class AbstractLogger implements Logger {
 	 */
 	protected String createLogMessage(LogLevel logLevel, Object... message) {
 		StringBuilder logMessage = new StringBuilder();
+		
+		logMessage.append("[");
+		logMessage.append(dateFormat.format(new Date()));
+		logMessage.append("]");
 		
 		if (logLevel != null) {
 			logMessage.append("[");
