@@ -130,7 +130,6 @@ public class ChunkState extends AbstractAppState {
 					}
 				}
 			}
-			
 		}
 	}
 	
