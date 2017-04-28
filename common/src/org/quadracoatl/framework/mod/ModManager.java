@@ -50,13 +50,17 @@ public class ModManager {
 		readonlyModsInLoadOrder = Collections.unmodifiableList(modsInLoadOrder);
 	}
 	
+	public void add(Mod mod) {
+		mods.put(mod.getName(), mod);
+		
+		detectLoadOrder();
+	}
+	
 	public void gatherMods(Path modsDirectory) {
 		if (Files.exists(modsDirectory, LinkOption.NOFOLLOW_LINKS)) {
 			try (DirectoryStream<Path> directories = Files.newDirectoryStream(modsDirectory.toAbsolutePath(), DirectoriesOnlyFilter.INSTANCE)) {
 				for (Path modDirectory : directories) {
-					Mod mod = new Mod(modDirectory);
-					
-					mods.put(mod.getName(), mod);
+					add(new Mod(modDirectory));
 				}
 			} catch (IOException e) {
 				LOGGER.error("Failed to read mods from \"", modsDirectory.toAbsolutePath(), "\".", e);
@@ -72,6 +76,16 @@ public class ModManager {
 	
 	public List<Mod> getModsInLoadOrder() {
 		return readonlyModsInLoadOrder;
+	}
+	
+	public void remove(Mod mod) {
+		remove(mod.getName());
+	}
+	
+	public void remove(String modName) {
+		mods.remove(modName);
+		
+		detectLoadOrder();
 	}
 	
 	@Override
