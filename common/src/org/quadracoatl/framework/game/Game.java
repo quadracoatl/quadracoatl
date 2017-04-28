@@ -48,7 +48,7 @@ public class Game {
 		
 		modManager.gatherMods(Paths.get(directory.toString(), MODS_DIRECTORY));
 		
-		for (Mod mod : modManager.getMods().values()) {
+		for (Mod mod : modManager.getModsInLoadOrder()) {
 			resourceManager.addResources(mod.getResourceManager());
 		}
 	}
