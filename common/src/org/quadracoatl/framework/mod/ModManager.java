@@ -45,9 +45,6 @@ public class ModManager {
 	
 	public ModManager() {
 		super();
-		
-		readonlyMods = Collections.unmodifiableMap(mods);
-		readonlyModsInLoadOrder = Collections.unmodifiableList(modsInLoadOrder);
 	}
 	
 	public void add(Mod mod) {
@@ -71,10 +68,18 @@ public class ModManager {
 	}
 	
 	public Map<String, Mod> getMods() {
+		if (readonlyMods == null) {
+			readonlyMods = Collections.unmodifiableMap(mods);
+		}
+		
 		return readonlyMods;
 	}
 	
 	public List<Mod> getModsInLoadOrder() {
+		if (readonlyModsInLoadOrder == null) {
+			readonlyModsInLoadOrder = Collections.unmodifiableList(modsInLoadOrder);
+		}
+		
 		return readonlyModsInLoadOrder;
 	}
 	
