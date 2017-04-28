@@ -216,7 +216,7 @@ public abstract class AbstractLogger implements Logger {
 		if (logLevel != null) {
 			logMessage.append("[");
 			logMessage.append(logLevel.toString());
-			if (logLevel == LogLevel.INFO || logLevel == LogLevel.FATAL) {
+			if (logLevel == LogLevel.INFO || logLevel == LogLevel.WARN) {
 				logMessage.append(" ");
 			}
 			logMessage.append("]");
