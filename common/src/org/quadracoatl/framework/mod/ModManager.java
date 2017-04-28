@@ -39,9 +39,9 @@ import org.quadracoatl.framework.logging.LoggerFactory;
 public class ModManager {
 	protected Map<String, Mod> mods = new HashMap<>();
 	protected List<Mod> modsInLoadOrder = new ArrayList<>();
-	protected List<Mod> readonlyModsInLoadOrder = null;
 	private final Logger LOGGER = LoggerFactory.getLogger(this);
 	private Map<String, Mod> readonlyMods = null;
+	private List<Mod> readonlyModsInLoadOrder = null;
 	
 	public ModManager() {
 		super();
