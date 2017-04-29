@@ -48,6 +48,10 @@ public final class LogUtil {
 			return "null";
 		}
 		
+		if (object instanceof Class<?>) {
+			return ((Class<?>)object).getSimpleName();
+		}
+		
 		return object.getClass().getSimpleName()
 				+ "@"
 				+ String.format("%08x", Integer.valueOf(System.identityHashCode(object)));
