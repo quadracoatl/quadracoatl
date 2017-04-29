@@ -55,6 +55,13 @@ public class QuadracoatlApplication extends SimpleApplication {
 	}
 	
 	@Override
+	public void destroy() {
+		super.destroy();
+		
+		stop();
+	}
+	
+	@Override
 	public void simpleInitApp() {
 		flyCam.setMoveSpeed(25);
 		

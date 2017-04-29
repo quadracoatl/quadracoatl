@@ -52,7 +52,7 @@ public final class Main {
 		
 		Interlayer interlayer = null;
 		
-		LoggerFactory.setLogLevel(LogLevel.WARN);
+		LoggerFactory.setLogLevel(LogLevel.TRACE);
 		
 		if (arguments.getString("mode").equals("single")) {
 			ServerEnvironment serverEnvironment = new ServerEnvironment(game);
@@ -75,8 +75,5 @@ public final class Main {
 		QuadracoatlApplication application = new QuadracoatlApplication(arguments.getString("path"), interlayer);
 		application.setSettings(appSettings);
 		application.start(true);
-		
-		// Make sure that the application does correctly exit.
-		application.stop();
 	}
 }
