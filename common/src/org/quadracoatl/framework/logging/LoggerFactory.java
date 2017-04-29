@@ -38,23 +38,6 @@ public final class LoggerFactory {
 	}
 	
 	/**
-	 * Gets the {@link Logger} for the given {@link Class}.
-	 * <p>
-	 * The returned {@link Logger} will have the {@link Class#getSimpleName()}
-	 * set as {@link Logger#getName() name}.
-	 * 
-	 * @param clazz The {@link Class} for which to get the {@link Logger}.
-	 * @return The {@link Logger} for the given {@link Class}.
-	 */
-	public static final Logger getLogger(Class<?> clazz) {
-		if (clazz == null) {
-			return getLogger("null");
-		} else {
-			return getLogger(clazz.getSimpleName());
-		}
-	}
-	
-	/**
 	 * Gets the {@link Logger} for the given {@link Object}.
 	 * <p>
 	 * The returned {@link Logger} will have the
