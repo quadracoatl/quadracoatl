@@ -53,4 +53,8 @@ public class HashStack<TYPE> {
 			orderedObjects.add(object);
 		}
 	}
+	
+	public int size() {
+		return orderedObjects.size();
+	}
 }
