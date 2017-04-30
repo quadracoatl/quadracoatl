@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.quadracoatl.environments.ClientEnvironment;
 import org.quadracoatl.framework.chunk.Chunk;
-import org.quadracoatl.framework.chunk.managers.FifoChunkManager;
+import org.quadracoatl.framework.chunk.managers.RingChunkManager;
 import org.quadracoatl.framework.common.Vector3i;
 import org.quadracoatl.framework.logging.Logger;
 import org.quadracoatl.framework.logging.LoggerFactory;
@@ -66,7 +66,7 @@ public class ChunkState extends AbstractAppState {
 		
 		app.getViewPort().detachScene(chunksNode);
 		
-		clientEnvironment.getCurrentRealm().swapChunkManager(new FifoChunkManager(256));
+		clientEnvironment.getCurrentRealm().swapChunkManager(new RingChunkManager(256));
 	}
 	
 	@Override
@@ -123,11 +123,7 @@ public class ChunkState extends AbstractAppState {
 		for (int x = coordinate.x - 1; x <= coordinate.x + 1; x++) {
 			for (int z = coordinate.z - 1; z <= coordinate.z + 1; z++) {
 				for (int y = coordinate.y - 1; y <= coordinate.y + 1; y++) {
-					if (x != coordinate.x
-							&& y != coordinate.y
-							&& z != coordinate.z) {
-						enqueueForRemeshing(new Vector3i(x, y, z));
-					}
+					enqueueForRemeshing(new Vector3i(x, y, z));
 				}
 			}
 		}
@@ -201,18 +197,18 @@ public class ChunkState extends AbstractAppState {
 	private void spawnChunks() {
 		while (spawnThreadActive && app != null) {
 			try {
-				if (!chunkCoordinatesToSpawn.isEmpty()) {
+				while (!chunkCoordinatesToSpawn.isEmpty() && remeshStack.size() <= 36) {
 					Vector3i chunkCoordinate = chunkCoordinatesToSpawn.pop();
 					
 					if (!spawnedCoordinatesToChunks.containsKey(chunkCoordinate)) {
 						fetchChunk(chunkCoordinate);
-					} else {
-						enqueueForRemeshing(chunkCoordinate);
+						
+						enqueueNeighboursForRemeshing(chunkCoordinate);
+						enqueueUpdateJobIfNeeded();
 					}
-					
-					enqueueNeighboursForRemeshing(chunkCoordinate);
-					enqueueUpdateJobIfNeeded();
-				} else if (!remeshStack.isEmpty()) {
+				}
+				
+				if (!remeshStack.isEmpty()) {
 					remeshChunks();
 					enqueueUpdateJobIfNeeded();
 				} else {

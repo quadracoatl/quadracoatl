@@ -21,11 +21,11 @@ package org.quadracoatl.framework.chunk.managers;
 
 import org.quadracoatl.framework.chunk.Chunk;
 
-public class FifoChunkManager extends ChunkManager {
+public class RingChunkManager extends ChunkManager {
 	private Chunk[] buffer = null;
 	private int currentIndex = 0;
 	
-	public FifoChunkManager(int bufferSize) {
+	public RingChunkManager(int bufferSize) {
 		super();
 		
 		buffer = new Chunk[bufferSize];

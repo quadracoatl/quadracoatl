@@ -22,9 +22,9 @@ package org.quadracoatl.jmeclient.extensions;
 import java.util.function.Consumer;
 
 import org.quadracoatl.framework.chunk.Chunk;
-import org.quadracoatl.framework.chunk.managers.FifoChunkManager;
+import org.quadracoatl.framework.chunk.managers.RingChunkManager;
 
-public class JmeChunkManager extends FifoChunkManager {
+public class JmeChunkManager extends RingChunkManager {
 	private Consumer<Chunk> onRemove = null;
 	
 	public JmeChunkManager(Consumer<Chunk> onRemove) {
