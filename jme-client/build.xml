@@ -11,9 +11,9 @@
 			<include name="jme3-core.jar" />
 			<include name="jme3-desktop.jar" />
 			<include name="jme3-efects.jar" />
-			<include name="jme3-lwjgl3.jar" />
-			<include name="lwjgl-platform-3.0.0b-natives-linux.jar" />
-			<include name="lwjgl-3.0.0b.jar" />
+			<include name="jme3-lwjgl.jar" />
+			<include name="lwjgl-platform-natives-linux.jar" />
+			<include name="lwjgl.jar" />
 		</fileset>
 	</path>
 	
