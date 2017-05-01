@@ -1,5 +1,5 @@
 <project name="quadracoatl-common" default="dist" basedir=".">
-	<property name="version" value="prototype-3" />
+	<property name="version" value="alpha-1" />
 	
 	<path id="libs">
 		<fileset dir="libs/jopt-simple/">
