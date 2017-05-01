@@ -21,7 +21,7 @@ package org.quadracoatl.framework.chunk.managers;
 
 import org.quadracoatl.framework.chunk.Chunk;
 
-public class RingChunkManager extends ChunkManager {
+public class RingChunkManager extends SimpleChunkManager {
 	private Chunk[] buffer = null;
 	private int currentIndex = 0;
 	
@@ -32,8 +32,8 @@ public class RingChunkManager extends ChunkManager {
 	}
 	
 	@Override
-	public void put(Chunk chunk) {
-		super.put(chunk);
+	public void add(Chunk chunk) {
+		super.add(chunk);
 		
 		currentIndex++;
 		

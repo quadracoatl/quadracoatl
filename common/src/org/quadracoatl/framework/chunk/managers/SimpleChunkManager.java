@@ -19,54 +19,81 @@
 
 package org.quadracoatl.framework.chunk.managers;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.quadracoatl.framework.chunk.Chunk;
+import org.quadracoatl.framework.chunk.ChunkManager;
+import org.quadracoatl.framework.realm.Realm;
 
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class ChunkManager {
-	protected Set<Chunk> chunks = new HashSet<>();
-	protected TLongObjectMap<Chunk> indexed = new TLongObjectHashMap<>();
+public class SimpleChunkManager implements ChunkManager {
+	protected TLongObjectMap<Chunk> indexedChunks = new TLongObjectHashMap<>();
+	protected Realm realm = null;
 	
-	public ChunkManager() {
+	public SimpleChunkManager() {
 		super();
 	}
 	
-	public boolean contains(int indexX, int indexY, int indexZ) {
-		return indexed.containsKey(makeIndex(indexX, indexY, indexZ));
-	}
-	
-	public void copyChunksTo(ChunkManager targetChunkManager) {
-		for (Chunk chunk : chunks) {
-			targetChunkManager.put(chunk);
-		}
-	}
-	
-	public synchronized Chunk get(int indexX, int indexY, int indexZ) {
-		return indexed.get(makeIndex(indexX, indexY, indexZ));
-	}
-	
-	public synchronized void put(Chunk chunk) {
+	@Override
+	public void add(Chunk chunk) {
 		if (chunk == null) {
 			return;
 		}
 		
-		indexed.put(makeIndex(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()), chunk);
-		chunks.add(chunk);
+		indexedChunks.put(
+				makeIndex(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()),
+				chunk);
 	}
 	
+	@Override
+	public void addAll(Iterable<Chunk> chunks) {
+		if (chunks != null) {
+			for (Chunk chunk : chunks) {
+				add(chunk);
+			}
+		}
+	}
+	
+	@Override
+	public void attachTo(Realm realm) {
+		detach();
+		
+		this.realm = realm;
+	}
+	
+	@Override
+	public void detach() {
+		realm = null;
+		
+		indexedChunks.clear();
+	}
+	
+	@Override
+	public Chunk get(int x, int y, int z) {
+		return indexedChunks.get(makeIndex(x, y, z));
+	}
+	
+	@Override
+	public List<Chunk> getChunks() {
+		return Collections.unmodifiableList(new ArrayList<>(indexedChunks.valueCollection()));
+	}
+	
+	@Override
 	public void remove(Chunk chunk) {
-		remove(
-				chunk.getIndexX(),
-				chunk.getIndexY(),
-				chunk.getIndexZ());
+		if (chunk == null) {
+			return;
+		}
+		
+		remove(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ());
 	}
 	
-	public synchronized void remove(int indexX, int indexY, int indexZ) {
-		chunks.remove(indexed.remove(makeIndex(indexX, indexY, indexZ)));
+	@Override
+	public void remove(int indexX, int indexY, int indexZ) {
+		indexedChunks.remove(makeIndex(indexX, indexY, indexZ));
 	}
 	
 	protected long makeIndex(int indexX, int indexY, int indexZ) {
@@ -78,7 +105,7 @@ public class ChunkManager {
 		return index;
 	}
 	
-	private final int packInto21bits(int value) {
+	protected final int packInto21bits(int value) {
 		int smallValue = value;
 		
 		smallValue = smallValue & 0xFFFFF;

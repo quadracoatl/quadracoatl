@@ -24,8 +24,9 @@ import java.util.List;
 
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.ChunkDataProvider;
+import org.quadracoatl.framework.chunk.ChunkManager;
 import org.quadracoatl.framework.chunk.SpawnBehavior;
-import org.quadracoatl.framework.chunk.managers.ChunkManager;
+import org.quadracoatl.framework.chunk.managers.SimpleChunkManager;
 import org.quadracoatl.framework.common.MathUtil;
 import org.quadracoatl.framework.common.Region3d;
 import org.quadracoatl.framework.common.Vector3d;
@@ -37,7 +38,7 @@ import org.quadracoatl.framework.entities.components.UpdateComponent;
 public class Realm {
 	protected Vector3d blockSize = null;
 	protected Region3d bounds = null;
-	protected transient ChunkManager chunkManager = new ChunkManager();
+	protected transient ChunkManager chunkManager = new SimpleChunkManager();
 	protected transient List<ChunkDataProvider> chunkProviders = new ArrayList<>();
 	protected Vector3i chunkSize = null;
 	protected transient Cosmos cosmos;
@@ -132,7 +133,7 @@ public class Realm {
 					chunkSize.z);
 			
 			chunk.setRealm(this);
-			chunkManager.put(chunk);
+			chunkManager.add(chunk);
 			
 			fillChunkByProviders(chunk);
 		}
@@ -203,10 +204,6 @@ public class Realm {
 		this.bounds = bounds;
 	}
 	
-	public void setChunk(Chunk chunk) {
-		chunkManager.put(chunk);
-	}
-	
 	public void setCosmos(Cosmos parent) {
 		this.cosmos = parent;
 	}
@@ -215,10 +212,15 @@ public class Realm {
 		this.timeProvider = timeProvider;
 	}
 	
-	public void swapChunkManager(ChunkManager newChunkManager) {
-		chunkManager.copyChunksTo(newChunkManager);
+	public void swapChunkManager(SimpleChunkManager newChunkManager) {
+		List<Chunk> chunks = chunkManager.getChunks();
+		
+		chunkManager.detach();
 		
 		chunkManager = newChunkManager;
+		
+		chunkManager.attachTo(this);
+		chunkManager.addAll(chunks);
 	}
 	
 	public void update(long elapsedNanoSecondsSinceLastUpdate) {
