@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.ChunkManager;
+import org.quadracoatl.framework.common.VectorUtil;
 import org.quadracoatl.framework.realm.Realm;
 
 import gnu.trove.map.TLongObjectMap;
@@ -45,7 +46,7 @@ public class SimpleChunkManager implements ChunkManager {
 		}
 		
 		indexedChunks.put(
-				makeIndex(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()),
+				VectorUtil.pack(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()),
 				chunk);
 	}
 	
@@ -74,7 +75,7 @@ public class SimpleChunkManager implements ChunkManager {
 	
 	@Override
 	public Chunk get(int x, int y, int z) {
-		return indexedChunks.get(makeIndex(x, y, z));
+		return indexedChunks.get(VectorUtil.pack(x, y, z));
 	}
 	
 	@Override
@@ -93,27 +94,6 @@ public class SimpleChunkManager implements ChunkManager {
 	
 	@Override
 	public void remove(int indexX, int indexY, int indexZ) {
-		indexedChunks.remove(makeIndex(indexX, indexY, indexZ));
-	}
-	
-	protected long makeIndex(int indexX, int indexY, int indexZ) {
-		long index = 0;
-		index = index | (packInto21bits(indexX));
-		index = index | ((long)packInto21bits(indexY) << 21);
-		index = index | ((long)packInto21bits(indexZ) << 42);
-		
-		return index;
-	}
-	
-	protected final int packInto21bits(int value) {
-		int smallValue = value;
-		
-		smallValue = smallValue & 0xFFFFF;
-		
-		if (value < 0) {
-			smallValue = smallValue | 0x100000;
-		}
-		
-		return smallValue;
+		indexedChunks.remove(VectorUtil.pack(indexX, indexY, indexZ));
 	}
 }
