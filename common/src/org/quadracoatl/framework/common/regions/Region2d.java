@@ -17,17 +17,19 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.common;
+package org.quadracoatl.framework.common.regions;
 
-public class Region2i {
-	public Vector2i end = new Vector2i();
-	public Vector2i start = new Vector2i();
+import org.quadracoatl.framework.common.vectors.Vector2d;
+
+public class Region2d {
+	public Vector2d end = new Vector2d();
+	public Vector2d start = new Vector2d();
 	
-	public Region2i() {
+	public Region2d() {
 		super();
 	}
 	
-	public Region2i(int startX, int startY, int endX, int endY) {
+	public Region2d(double startX, double startY, double endX, double endY) {
 		super();
 		
 		start.x = startX;
@@ -44,7 +46,7 @@ public class Region2i {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Region2i other = (Region2i)obj;
+		Region2d other = (Region2d)obj;
 		if (end == null) {
 			if (other.end != null)
 				return false;
@@ -58,11 +60,11 @@ public class Region2i {
 		return true;
 	}
 	
-	public Vector2i getEnd() {
+	public Vector2d getEnd() {
 		return end;
 	}
 	
-	public Vector2i getStart() {
+	public Vector2d getStart() {
 		return start;
 	}
 	
@@ -75,11 +77,21 @@ public class Region2i {
 		return result;
 	}
 	
-	public void set(int startX, int startY, int endX, int endY) {
+	public void set(double startX, double startY, double endX, double endY) {
 		start.x = startX;
 		start.y = startY;
 		end.x = endX;
 		end.y = endY;
+	}
+	
+	public void setEnd(double x, double y) {
+		end.x = x;
+		end.y = y;
+	}
+	
+	public void setStart(double x, double y) {
+		start.x = x;
+		start.y = y;
 	}
 	
 	@Override

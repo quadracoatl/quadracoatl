@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.quadracoatl.framework.block.Block;
-import org.quadracoatl.framework.common.Vector3i;
+import org.quadracoatl.framework.common.vectors.Vector3i;
 import org.quadracoatl.framework.realm.Realm;
 
 public class Chunk {

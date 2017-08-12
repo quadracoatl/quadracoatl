@@ -17,28 +17,32 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.common;
+package org.quadracoatl.framework.common.vectors;
 
 import org.quadracoatl.framework.logging.LogUtil;
 
-public class Vector2d {
-	public double x = 0;
-	public double y = 0;
+public class Vector2i {
+	public int x = 0;
+	public int y = 0;
 	
-	public Vector2d() {
+	public Vector2i() {
 		super();
 	}
 	
-	public Vector2d(double x, double y) {
+	public Vector2i(int x, int y) {
 		super();
 		
 		this.x = x;
 		this.y = y;
 	}
 	
-	public boolean equals(double x, double y) {
-		return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(x)
-				&& Double.doubleToLongBits(this.y) == Double.doubleToLongBits(y);
+	public Vector2i(Vector2i vector) {
+		this(vector.x, vector.y);
+	}
+	
+	public boolean equals(int x, int y) {
+		return this.x == x
+				&& this.y == y;
 	}
 	
 	@Override
@@ -52,21 +56,21 @@ public class Vector2d {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Vector2d other = (Vector2d)obj;
-		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
+		Vector2i other = (Vector2i)obj;
+		if (x != other.x) {
 			return false;
 		}
-		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)) {
+		if (y != other.y) {
 			return false;
 		}
 		return true;
 	}
 	
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 	
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 	
@@ -74,29 +78,26 @@ public class Vector2d {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(x);
-		result = prime * result + (int)(temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y);
-		result = prime * result + (int)(temp ^ (temp >>> 32));
+		result = prime * result + x;
+		result = prime * result + y;
 		return result;
 	}
 	
-	public void set(double x, double y) {
+	public void set(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public void set(Vector2d vector) {
+	public void set(Vector2i vector) {
 		this.x = vector.x;
 		this.y = vector.y;
 	}
 	
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 	
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 	
@@ -105,7 +106,7 @@ public class Vector2d {
 		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + "]";
 	}
 	
-	public boolean update(double x, double y) {
+	public boolean update(int x, int y) {
 		if (!equals(x, y)) {
 			set(x, y);
 			return true;

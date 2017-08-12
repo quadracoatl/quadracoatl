@@ -19,7 +19,7 @@
 
 package org.quadracoatl.framework.resources.lights;
 
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.resources.colors.Color;
 
 public class LightSource {

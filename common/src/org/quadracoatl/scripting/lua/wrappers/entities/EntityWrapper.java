@@ -23,7 +23,7 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.OneArgFunction;
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.entities.Entity;
 import org.quadracoatl.framework.entities.components.ColorComponent;
 import org.quadracoatl.framework.entities.components.LightSourceComponent;

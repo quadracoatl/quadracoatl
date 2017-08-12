@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.ChunkManager;
-import org.quadracoatl.framework.common.VectorUtil;
+import org.quadracoatl.framework.common.vectors.VectorUtil;
 import org.quadracoatl.framework.realm.Realm;
 
 import gnu.trove.map.TLongObjectMap;

@@ -19,7 +19,7 @@
 
 package org.quadracoatl.framework.block.type_parameters;
 
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 
 public class DisplacedCubeParameters {
 	private Vector3d displacementStrength = null;

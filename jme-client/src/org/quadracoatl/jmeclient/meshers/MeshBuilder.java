@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.quadracoatl.framework.block.Side;
-import org.quadracoatl.framework.common.Region2d;
+import org.quadracoatl.framework.common.regions.Region2d;
 import org.quadracoatl.framework.resources.textures.Texture;
 
 import com.jme3.math.Vector2f;

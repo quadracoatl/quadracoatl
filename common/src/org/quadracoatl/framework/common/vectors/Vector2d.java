@@ -17,35 +17,28 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.common;
+package org.quadracoatl.framework.common.vectors;
 
 import org.quadracoatl.framework.logging.LogUtil;
 
-public class Vector3i {
-	public int x = 0;
-	public int y = 0;
-	public int z = 0;
+public class Vector2d {
+	public double x = 0;
+	public double y = 0;
 	
-	public Vector3i() {
+	public Vector2d() {
 		super();
 	}
 	
-	public Vector3i(int x, int y, int z) {
+	public Vector2d(double x, double y) {
 		super();
 		
 		this.x = x;
 		this.y = y;
-		this.z = z;
 	}
 	
-	public Vector3i(Vector3i vector) {
-		this(vector.x, vector.y, vector.z);
-	}
-	
-	public boolean equals(int x, int y, int z) {
-		return this.x == x
-				&& this.y == y
-				&& this.z == z;
+	public boolean equals(double x, double y) {
+		return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(x)
+				&& Double.doubleToLongBits(this.y) == Double.doubleToLongBits(y);
 	}
 	
 	@Override
@@ -59,73 +52,62 @@ public class Vector3i {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Vector3i other = (Vector3i)obj;
-		if (x != other.x) {
+		Vector2d other = (Vector2d)obj;
+		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
 			return false;
 		}
-		if (y != other.y) {
-			return false;
-		}
-		if (z != other.z) {
+		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)) {
 			return false;
 		}
 		return true;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return y;
-	}
-	
-	public int getZ() {
-		return z;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		result = prime * result + z;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int)(temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int)(temp ^ (temp >>> 32));
 		return result;
 	}
 	
-	public void set(int x, int y, int z) {
+	public void set(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.z = z;
 	}
 	
-	public void set(Vector3i vector) {
+	public void set(Vector2d vector) {
 		this.x = vector.x;
 		this.y = vector.y;
-		this.z = vector.z;
 	}
 	
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 	
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
-	}
-	
-	public void setZ(int z) {
-		this.z = z;
 	}
 	
 	@Override
 	public String toString() {
-		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + ", z=" + z + "]";
+		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + "]";
 	}
 	
-	public boolean update(int x, int y, int z) {
-		if (!equals(x, y, z)) {
-			set(x, y, z);
+	public boolean update(double x, double y) {
+		if (!equals(x, y)) {
+			set(x, y);
 			return true;
 		}
 		

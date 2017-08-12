@@ -21,7 +21,7 @@ package org.quadracoatl.jmeclient.spatials.celestial;
 
 import java.util.List;
 
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.realm.components.SkyComponent;
 import org.quadracoatl.framework.resources.colors.Color;
 import org.quadracoatl.framework.resources.colors.ColorBlendMode;

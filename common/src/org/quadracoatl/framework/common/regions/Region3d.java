@@ -17,17 +17,19 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.common;
+package org.quadracoatl.framework.common.regions;
 
-public class Region3i {
-	public Vector3i end = new Vector3i();
-	public Vector3i start = new Vector3i();
+import org.quadracoatl.framework.common.vectors.Vector3d;
+
+public class Region3d {
+	public Vector3d end = new Vector3d();
+	public Vector3d start = new Vector3d();
 	
-	public Region3i() {
+	public Region3d() {
 		super();
 	}
 	
-	public Region3i(int startX, int startY, int startZ, int endX, int endY, int endZ) {
+	public Region3d(double startX, double startY, double startZ, double endX, double endY, double endZ) {
 		super();
 		
 		start.x = startX;
@@ -46,7 +48,7 @@ public class Region3i {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Region3i other = (Region3i)obj;
+		Region3d other = (Region3d)obj;
 		if (end == null) {
 			if (other.end != null)
 				return false;
@@ -60,11 +62,11 @@ public class Region3i {
 		return true;
 	}
 	
-	public Vector3i getEnd() {
+	public Vector3d getEnd() {
 		return end;
 	}
 	
-	public Vector3i getStart() {
+	public Vector3d getStart() {
 		return start;
 	}
 	
@@ -77,7 +79,7 @@ public class Region3i {
 		return result;
 	}
 	
-	public void set(int startX, int startY, int startZ, int endX, int endY, int endZ) {
+	public void set(double startX, double startY, double startZ, double endX, double endY, double endZ) {
 		start.x = startX;
 		start.y = startY;
 		start.z = startZ;

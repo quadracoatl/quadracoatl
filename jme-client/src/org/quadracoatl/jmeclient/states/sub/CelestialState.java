@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.quadracoatl.environments.ClientEnvironment;
 import org.quadracoatl.framework.common.MathUtil;
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.entities.Component;
 import org.quadracoatl.framework.entities.Entity;
 import org.quadracoatl.framework.entities.EntityContainer;

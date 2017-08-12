@@ -12,7 +12,7 @@ import java.util.Set;
 import org.quadracoatl.environments.ClientEnvironment;
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.managers.RingChunkManager;
-import org.quadracoatl.framework.common.Vector3i;
+import org.quadracoatl.framework.common.vectors.Vector3i;
 import org.quadracoatl.framework.logging.Logger;
 import org.quadracoatl.framework.logging.LoggerFactory;
 import org.quadracoatl.framework.realm.Realm;
@@ -66,7 +66,7 @@ public class ChunkState extends AbstractAppState {
 		
 		app.getViewPort().detachScene(chunksNode);
 		
-		clientEnvironment.getCurrentRealm().swapChunkManager(new RingChunkManager(256));
+		clientEnvironment.getCurrentRealm().swapChunkManager(new RingChunkManager(4096));
 	}
 	
 	@Override

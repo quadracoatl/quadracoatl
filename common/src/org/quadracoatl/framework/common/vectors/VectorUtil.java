@@ -17,7 +17,7 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.common;
+package org.quadracoatl.framework.common.vectors;
 
 public final class VectorUtil {
 	private static final int NEGATIVE_MASK = 0xfff00000;

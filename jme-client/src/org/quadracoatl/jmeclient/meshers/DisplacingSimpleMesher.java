@@ -26,7 +26,7 @@ import org.quadracoatl.framework.block.BlockType;
 import org.quadracoatl.framework.block.Side;
 import org.quadracoatl.framework.block.type_parameters.DisplacedCubeParameters;
 import org.quadracoatl.framework.chunk.Chunk;
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.realm.Realm;
 import org.quadracoatl.framework.support.noise.noises.OpenSimplexNoise;
 

@@ -38,9 +38,9 @@ import javax.imageio.ImageIO;
 
 import org.quadracoatl.framework.block.Side;
 import org.quadracoatl.framework.common.MathUtil;
-import org.quadracoatl.framework.common.Region2d;
-import org.quadracoatl.framework.common.Vector2i;
-import org.quadracoatl.framework.common.Vector3i;
+import org.quadracoatl.framework.common.regions.Region2d;
+import org.quadracoatl.framework.common.vectors.Vector2i;
+import org.quadracoatl.framework.common.vectors.Vector3i;
 import org.quadracoatl.framework.resources.ResourceManager;
 import org.quadracoatl.framework.resources.ResourceType;
 

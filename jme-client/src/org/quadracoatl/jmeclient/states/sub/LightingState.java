@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.quadracoatl.environments.ClientEnvironment;
 import org.quadracoatl.framework.block.Block;
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.entities.Component;
 import org.quadracoatl.framework.entities.EntityContainer;
 import org.quadracoatl.framework.entities.changes.ChangeType;

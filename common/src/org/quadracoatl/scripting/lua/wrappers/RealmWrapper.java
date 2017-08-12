@@ -25,7 +25,7 @@ import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.ChunkDataProvider;
-import org.quadracoatl.framework.common.Vector3d;
+import org.quadracoatl.framework.common.vectors.Vector3d;
 import org.quadracoatl.framework.entities.Entity;
 import org.quadracoatl.framework.entities.components.ColorComponent;
 import org.quadracoatl.framework.entities.components.LightSourceComponent;
