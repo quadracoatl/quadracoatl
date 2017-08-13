@@ -19,16 +19,19 @@
 
 package org.quadracoatl.framework.chunk.managers;
 
+import java.lang.ref.WeakReference;
+
 import org.quadracoatl.framework.chunk.Chunk;
 
 public class RingChunkManager extends SimpleChunkManager {
-	private Chunk[] buffer = null;
+	private WeakReference<Chunk>[] buffer = null;
 	private int currentIndex = 0;
 	
+	@SuppressWarnings("unchecked")
 	public RingChunkManager(int bufferSize) {
 		super();
 		
-		buffer = new Chunk[bufferSize];
+		buffer = new WeakReference[bufferSize];
 	}
 	
 	@Override
@@ -41,12 +44,27 @@ public class RingChunkManager extends SimpleChunkManager {
 			currentIndex = 0;
 		}
 		
-		Chunk chunkToRemove = buffer[currentIndex];
+		WeakReference<Chunk> chunkToRemoveReference = buffer[currentIndex];
 		
-		if (chunkToRemove != null) {
-			remove(chunkToRemove);
+		if (chunkToRemoveReference != null) {
+			Chunk chunkToRemove = chunkToRemoveReference.get();
+			
+			if (chunkToRemove != null) {
+				remove(chunkToRemove);
+			}
 		}
 		
-		buffer[currentIndex] = chunk;
+		buffer[currentIndex] = new WeakReference<Chunk>(chunk);
+	}
+	
+	@Override
+	public void detach() {
+		super.detach();
+		
+		for (int index = 0; index < buffer.length; index++) {
+			buffer[index] = null;
+		}
+		
+		currentIndex = 0;
 	}
 }
