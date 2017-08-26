@@ -109,7 +109,7 @@ public class ClientEnvironment extends AbstractThreadedUpdatable {
 	}
 	
 	@Override
-	protected void init() {
+	protected void init() throws Throwable {
 		super.init();
 		
 		// TODO The realm might change.

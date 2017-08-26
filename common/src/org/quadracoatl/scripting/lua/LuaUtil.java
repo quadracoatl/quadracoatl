@@ -19,6 +19,10 @@
 
 package org.quadracoatl.scripting.lua;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.quadracoatl.framework.support.hashers.MurmurHasher;
@@ -173,6 +177,43 @@ public final class LuaUtil {
 		}
 		
 		return coercedEnum;
+	}
+	
+	public static final StackTraceElement[] extractLuaStacktrace(Path path, StackTraceElement[] stackTrace) {
+		if (stackTrace == null || stackTrace.length == 0) {
+			return new StackTraceElement[0];
+		}
+		
+		List<StackTraceElement> luaStackTrace = new ArrayList<>();
+		
+		String pathAsString = path.toString().replace('.', '/');
+		
+		for (StackTraceElement stackTraceElement : stackTrace) {
+			String fileName = stackTraceElement.getFileName();
+			
+			if (fileName != null && fileName.startsWith(pathAsString)) {
+				fileName = fileName.substring(pathAsString.length());
+				fileName = fileName.replaceAll("/+", "/");
+				
+				String methodName = stackTraceElement.getMethodName();
+				
+				int dollarIndex = stackTraceElement.getClassName().indexOf('$');
+				
+				if (dollarIndex >= 0) {
+					methodName = stackTraceElement.getClassName().substring(dollarIndex + 1);
+				}
+				
+				StackTraceElement luaStackTraceElement = new StackTraceElement(
+						"",
+						fileName,
+						methodName,
+						stackTraceElement.getLineNumber());
+				
+				luaStackTrace.add(luaStackTraceElement);
+			}
+		}
+		
+		return luaStackTrace.toArray(new StackTraceElement[luaStackTrace.size()]);
 	}
 	
 	public static final <ENUM extends Enum<?>> void loadEnum(LuaValue env, Class<ENUM> enumClass) {

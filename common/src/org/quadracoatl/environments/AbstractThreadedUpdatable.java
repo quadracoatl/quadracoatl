@@ -87,7 +87,7 @@ public abstract class AbstractThreadedUpdatable {
 		thread.start();
 		
 		try {
-			while (!started) {
+			while (!started && thread.isAlive()) {
 				Thread.sleep(16);
 			}
 		} catch (InterruptedException e) {
@@ -115,7 +115,7 @@ public abstract class AbstractThreadedUpdatable {
 		logger.info("Destroying...");
 	}
 	
-	protected void init() {
+	protected void init() throws Throwable {
 		logger.info("Initializing...");
 	}
 	
@@ -135,7 +135,14 @@ public abstract class AbstractThreadedUpdatable {
 		try {
 			logger.info("Starting.");
 			
-			init();
+			try {
+				init();
+			} catch (Throwable th) {
+				logger.fatal("Failed to initialize!", th);
+				
+				running = false;
+				return;
+			}
 			
 			started = true;
 			

@@ -45,6 +45,7 @@ import org.quadracoatl.framework.cosmos.Cosmos;
 import org.quadracoatl.framework.mod.Mod;
 import org.quadracoatl.framework.scheduler.Scheduler;
 import org.quadracoatl.scripting.ScriptEnvironment;
+import org.quadracoatl.scripting.ScriptException;
 import org.quadracoatl.scripting.ScriptingFeature;
 import org.quadracoatl.scripting.lua.libs.CosmosLib;
 import org.quadracoatl.scripting.lua.libs.LogLib;
@@ -113,7 +114,7 @@ public class LuaEnvironment implements ScriptEnvironment {
 	}
 	
 	@Override
-	public void load(Mod mod) {
+	public void load(Mod mod) throws ScriptException {
 		Path initFile = Paths.get(mod.getDirectory().toString(), INIT_LUA_FILENAME);
 		
 		if (Files.exists(initFile, LinkOption.NOFOLLOW_LINKS)) {
@@ -132,10 +133,20 @@ public class LuaEnvironment implements ScriptEnvironment {
 			doFileFunction.setLimit(mod.getDirectory());
 			loadFileFunction.setLimit(mod.getDirectory());
 			
-			load(initFile);
-			
-			doFileFunction.setLimit(null);
-			loadFileFunction.setLimit(null);
+			try {
+				load(initFile);
+			} catch (LuaError e) {
+				ScriptException exception = new ScriptException(
+						"Loading of mod '" + mod.getName() + "' failed: " + e.getMessage(),
+						e);
+				
+				exception.setStackTrace(LuaUtil.extractLuaStacktrace(mod.getDirectory().getParent(), e.getStackTrace()));
+				
+				throw exception;
+			} finally {
+				doFileFunction.setLimit(null);
+				loadFileFunction.setLimit(null);
+			}
 		}
 	}
 	

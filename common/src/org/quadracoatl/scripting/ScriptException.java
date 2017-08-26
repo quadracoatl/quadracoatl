@@ -1,5 +1,5 @@
 /*
- * Copyright 2016, Robert 'Bobby' Zenz
+ * Copyright 2017, Robert 'Bobby' Zenz
  * 
  * This file is part of Quadracoatl.
  * 
@@ -19,22 +19,16 @@
 
 package org.quadracoatl.scripting;
 
-import java.util.EnumSet;
-
-import org.quadracoatl.framework.cosmos.Cosmos;
-import org.quadracoatl.framework.mod.Mod;
-import org.quadracoatl.framework.scheduler.Scheduler;
-
-public interface ScriptEnvironment {
-	public void enableFeatures(EnumSet<ScriptingFeature> features);
+public class ScriptException extends Exception {
+	public ScriptException() {
+		super();
+	}
 	
-	public Cosmos getCosmos();
+	public ScriptException(String message) {
+		super(message);
+	}
 	
-	public Scheduler getScheduler();
-	
-	public void load(Mod mod) throws ScriptException;
-	
-	public void setCosmos(Cosmos cosmos);
-	
-	public void setScheduler(Scheduler scheduler);
+	public ScriptException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

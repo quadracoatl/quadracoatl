@@ -51,6 +51,11 @@ public final class Main {
 		ServerEnvironment serverEnvironment = new ServerEnvironment(game);
 		serverEnvironment.start();
 		
+		if (!serverEnvironment.isStarted()) {
+			LOGGER.fatal("Server environment did not start, exiting.");
+			System.exit(1);
+		}
+		
 		KryonetServer server = new KryonetServer(
 				serverEnvironment,
 				arguments.getInteger("tcp-port"),

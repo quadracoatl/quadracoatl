@@ -84,7 +84,7 @@ public class ServerEnvironment extends AbstractThreadedUpdatable {
 	}
 	
 	@Override
-	protected void init() {
+	protected void init() throws Throwable {
 		super.init();
 		
 		logger.info("Game: ", game.getDisplayName());
@@ -98,6 +98,7 @@ public class ServerEnvironment extends AbstractThreadedUpdatable {
 		
 		for (Mod mod : game.getModManager().getModsInLoadOrder()) {
 			logger.info("Loading mod: " + mod.getName());
+			
 			scriptEnvironment.load(mod);
 		}
 	}
