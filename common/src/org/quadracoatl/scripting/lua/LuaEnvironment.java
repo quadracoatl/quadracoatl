@@ -145,7 +145,7 @@ public class LuaEnvironment implements ScriptEnvironment {
 	}
 	
 	public void load(String code) {
-		environment.load(code);
+		environment.load(code).call();
 	}
 	
 	@Override
