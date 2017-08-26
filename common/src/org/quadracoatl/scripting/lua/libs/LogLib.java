@@ -55,8 +55,7 @@ public class LogLib extends TwoArgFunction {
 		log.set("trace", new log(LogLevel.TRACE));
 		log.set("warn", new log(LogLevel.WARN));
 		
-		LuaValue engine = env.get("engine");
-		engine.set("log", log);
+		env.set("log", log);
 		
 		return log;
 	}

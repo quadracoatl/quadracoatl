@@ -71,8 +71,7 @@ public class CosmosLib extends TwoArgFunction {
 		cosmos.set("registerRealm", new registerRealm());
 		cosmos.set("seed", new seed());
 		
-		LuaValue engine = env.get("engine");
-		engine.set("cosmos", cosmos);
+		env.set("cosmos", cosmos);
 		
 		return cosmos;
 	}

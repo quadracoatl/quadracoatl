@@ -52,8 +52,7 @@ public class SupportLib extends TwoArgFunction {
 		support.set("md5", new md5());
 		support.set("murmur", new murmur());
 		
-		LuaValue engine = env.get("engine");
-		engine.set("support", support);
+		env.set("support", support);
 		
 		return support;
 	}

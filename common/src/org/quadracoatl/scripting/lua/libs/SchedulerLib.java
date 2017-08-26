@@ -45,8 +45,7 @@ public class SchedulerLib extends TwoArgFunction {
 		scheduler.set("scheduleNext", new scheduleNext());
 		scheduler.set("unschedule", new unschedule());
 		
-		LuaValue engine = env.get("engine");
-		engine.set("scheduler", scheduler);
+		env.set("scheduler", scheduler);
 		
 		return scheduler;
 	}

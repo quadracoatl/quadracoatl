@@ -47,7 +47,6 @@ import org.quadracoatl.framework.scheduler.Scheduler;
 import org.quadracoatl.scripting.ScriptEnvironment;
 import org.quadracoatl.scripting.ScriptingFeature;
 import org.quadracoatl.scripting.lua.libs.CosmosLib;
-import org.quadracoatl.scripting.lua.libs.EngineLib;
 import org.quadracoatl.scripting.lua.libs.LogLib;
 import org.quadracoatl.scripting.lua.libs.SchedulerLib;
 import org.quadracoatl.scripting.lua.libs.SupportLib;
@@ -178,8 +177,6 @@ public class LuaEnvironment implements ScriptEnvironment {
 		
 		environment.load(new JseBaseLib());
 		environment.load(new JseMathLib());
-		
-		environment.load(new EngineLib());
 	}
 	
 	private void sandboxEnvironment() {
