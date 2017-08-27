@@ -20,7 +20,6 @@
 package org.quadracoatl.framework.entities.components;
 
 import org.quadracoatl.framework.common.vectors.Vector3d;
-import org.quadracoatl.framework.entities.AbstractComponent;
 import org.quadracoatl.framework.entities.Component;
 import org.quadracoatl.framework.logging.LogUtil;
 

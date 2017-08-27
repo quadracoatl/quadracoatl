@@ -17,8 +17,10 @@
  * along with Quadracoatl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.quadracoatl.framework.entities;
+package org.quadracoatl.framework.entities.components;
 
+import org.quadracoatl.framework.entities.Component;
+import org.quadracoatl.framework.entities.Entity;
 import org.quadracoatl.framework.entities.changes.ChangeType;
 import org.quadracoatl.framework.logging.LogUtil;
 import org.quadracoatl.framework.logging.Logger;

@@ -19,8 +19,8 @@
 
 package org.quadracoatl.framework.realm.components;
 
-import org.quadracoatl.framework.entities.AbstractComponent;
 import org.quadracoatl.framework.entities.Component;
+import org.quadracoatl.framework.entities.components.AbstractComponent;
 
 public class CelestialObjectComponent extends AbstractComponent {
 	protected String name = null;

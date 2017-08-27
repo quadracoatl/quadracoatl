@@ -19,7 +19,6 @@
 
 package org.quadracoatl.framework.entities.components;
 
-import org.quadracoatl.framework.entities.AbstractComponent;
 import org.quadracoatl.framework.entities.Component;
 import org.quadracoatl.framework.logging.LogUtil;
 import org.quadracoatl.framework.resources.colors.Color;

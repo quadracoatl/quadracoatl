@@ -19,8 +19,8 @@
 
 package org.quadracoatl.framework.entities.testcomponents;
 
-import org.quadracoatl.framework.entities.AbstractComponent;
 import org.quadracoatl.framework.entities.Component;
+import org.quadracoatl.framework.entities.components.AbstractComponent;
 
 public class TestComponent extends AbstractComponent {
 	private String value = "value";
