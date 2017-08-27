@@ -119,7 +119,7 @@ public abstract class AbstractThreadedUpdatable {
 		logger.info("Initializing...");
 	}
 	
-	protected void update(long elapsedNanoSecondsSinceLastUpdate) {
+	protected void update(long elapsedNanoSecondsSinceLastUpdate) throws Throwable {
 		synchronized (invokeNext) {
 			for (Runnable runnable : invokeNext) {
 				runnable.run();
@@ -153,7 +153,11 @@ public abstract class AbstractThreadedUpdatable {
 			while (running) {
 				long start = System.nanoTime();
 				
-				update(start - lastRun);
+				try {
+					update(start - lastRun);
+				} catch (Throwable th) {
+					logger.error("Error during update.", th);
+				}
 				
 				lastRun = System.nanoTime();
 				

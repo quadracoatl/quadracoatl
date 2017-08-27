@@ -104,7 +104,7 @@ public class ServerEnvironment extends AbstractThreadedUpdatable {
 	}
 	
 	@Override
-	protected void update(long elapsedNanoSecondsSinceLastUpdate) {
+	protected void update(long elapsedNanoSecondsSinceLastUpdate) throws Throwable {
 		super.update(elapsedNanoSecondsSinceLastUpdate);
 		
 		cosmos.update(elapsedNanoSecondsSinceLastUpdate);
