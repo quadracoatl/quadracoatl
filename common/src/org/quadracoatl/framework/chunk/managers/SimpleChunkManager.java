@@ -45,9 +45,11 @@ public class SimpleChunkManager implements ChunkManager {
 			return;
 		}
 		
-		indexedChunks.put(
-				VectorUtil.pack(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()),
-				chunk);
+		synchronized (this) {
+			indexedChunks.put(
+					VectorUtil.pack(chunk.getIndexX(), chunk.getIndexY(), chunk.getIndexZ()),
+					chunk);
+		}
 	}
 	
 	@Override
@@ -70,12 +72,16 @@ public class SimpleChunkManager implements ChunkManager {
 	public void detach() {
 		realm = null;
 		
-		indexedChunks.clear();
+		synchronized (this) {
+			indexedChunks.clear();
+		}
 	}
 	
 	@Override
 	public Chunk get(int x, int y, int z) {
-		return indexedChunks.get(VectorUtil.pack(x, y, z));
+		synchronized (this) {
+			return indexedChunks.get(VectorUtil.pack(x, y, z));
+		}
 	}
 	
 	@Override
@@ -94,6 +100,8 @@ public class SimpleChunkManager implements ChunkManager {
 	
 	@Override
 	public void remove(int indexX, int indexY, int indexZ) {
-		indexedChunks.remove(VectorUtil.pack(indexX, indexY, indexZ));
+		synchronized (this) {
+			indexedChunks.remove(VectorUtil.pack(indexX, indexY, indexZ));
+		}
 	}
 }
