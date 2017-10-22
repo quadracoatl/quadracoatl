@@ -33,7 +33,7 @@ public final class LogUtil {
 	
 	/**
 	 * Gets the identity hashcode of the given {@link Object} as 8-digit
-	 * hex-number with the leading classname in the format
+	 * hex-number with the leading simple classname in the format
 	 * "{@code class@11223344}". If the given {@link Object} is {@code null},
 	 * {@code "null"} will be returned.
 	 * 
@@ -43,7 +43,7 @@ public final class LogUtil {
 	 *         "{@code class@11223344}", {@code "null"} if the {@link Object} is
 	 *         {@code null}.
 	 */
-	public static final String getIdentity(Object object) {
+	public static final String getSimpleIdentity(Object object) {
 		if (object == null) {
 			return "null";
 		}

@@ -49,7 +49,7 @@ public class LocationComponent extends AbstractComponent {
 	@Override
 	public void updateWith(Component component) {
 		if (component instanceof LocationComponent) {
-			LOGGER.debug("Updating with ", LogUtil.getIdentity(component), ".");
+			LOGGER.debug("Updating with ", LogUtil.getSimpleIdentity(component), ".");
 			
 			Vector3d otherLocation = ((LocationComponent)component).location;
 			

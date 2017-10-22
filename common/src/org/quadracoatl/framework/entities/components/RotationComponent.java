@@ -49,7 +49,7 @@ public class RotationComponent extends AbstractComponent {
 	@Override
 	public void updateWith(Component component) {
 		if (component instanceof RotationComponent) {
-			LOGGER.debug("Updating with ", LogUtil.getIdentity(component), ".");
+			LOGGER.debug("Updating with ", LogUtil.getSimpleIdentity(component), ".");
 			
 			Vector3d otherRotation = ((RotationComponent)component).rotation;
 			

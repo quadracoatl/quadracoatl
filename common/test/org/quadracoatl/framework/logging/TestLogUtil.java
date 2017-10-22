@@ -26,14 +26,14 @@ import org.junit.Test;
 
 public class TestLogUtil {
 	@Test
-	public void testgetIdentity() {
-		Assert.assertEquals("getIdentity(null) did not return \"null\".", "null", LogUtil.getIdentity(null));
+	public void testgetSimpleIdentity() {
+		Assert.assertEquals("getIdentity(null) did not return \"null\".", "null", LogUtil.getSimpleIdentity(null));
 		
-		Assert.assertEquals("getIdentity(Object.class) did not return \"Object\".", "Object", LogUtil.getIdentity(Object.class));
-		Assert.assertEquals("getIdentity(HashMap.class) did not return \"HashMap\".", "HashMap", LogUtil.getIdentity(HashMap.class));
+		Assert.assertEquals("getIdentity(Object.class) did not return \"Object\".", "Object", LogUtil.getSimpleIdentity(Object.class));
+		Assert.assertEquals("getIdentity(HashMap.class) did not return \"HashMap\".", "HashMap", LogUtil.getSimpleIdentity(HashMap.class));
 		
 		Assert.assertTrue(
 				"getIdentity(new HashMap<Object, Object>) did not return a nice identity string.",
-				LogUtil.getIdentity(new HashMap<Object, Object>()).matches("HashMap@[0-9a-f]+"));
+				LogUtil.getSimpleIdentity(new HashMap<Object, Object>()).matches("HashMap@[0-9a-f]+"));
 	}
 }

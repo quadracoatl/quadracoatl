@@ -103,7 +103,7 @@ public class Vector2i {
 	
 	@Override
 	public String toString() {
-		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + "]";
+		return LogUtil.getSimpleIdentity(this) + "[x=" + x + ", y=" + y + "]";
 	}
 	
 	public boolean update(int x, int y) {

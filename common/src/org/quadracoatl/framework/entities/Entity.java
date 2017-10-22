@@ -102,14 +102,14 @@ public class Entity {
 			detach();
 		}
 		
-		LOGGER.debug("Attaching to ", LogUtil.getIdentity(parentContainer), ".");
+		LOGGER.debug("Attaching to ", LogUtil.getSimpleIdentity(parentContainer), ".");
 		
 		this.parentContainer = parentContainer;
 	}
 	
 	public void detach() {
 		if (parentContainer != null) {
-			LOGGER.debug("Detaching from ", LogUtil.getIdentity(parentContainer), ".");
+			LOGGER.debug("Detaching from ", LogUtil.getSimpleIdentity(parentContainer), ".");
 		}
 		
 		parentContainer = null;

@@ -102,7 +102,7 @@ public class Vector2d {
 	
 	@Override
 	public String toString() {
-		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + "]";
+		return LogUtil.getSimpleIdentity(this) + "[x=" + x + ", y=" + y + "]";
 	}
 	
 	public boolean update(double x, double y) {

@@ -120,7 +120,7 @@ public class Vector3i {
 	
 	@Override
 	public String toString() {
-		return LogUtil.getIdentity(this) + "[x=" + x + ", y=" + y + ", z=" + z + "]";
+		return LogUtil.getSimpleIdentity(this) + "[x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
 	
 	public boolean update(int x, int y, int z) {

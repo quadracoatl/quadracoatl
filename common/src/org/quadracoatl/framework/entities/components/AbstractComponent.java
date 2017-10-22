@@ -40,7 +40,7 @@ public abstract class AbstractComponent implements Component {
 			detach();
 		}
 		
-		LOGGER.debug("Attaching to #", Integer.valueOf(entity.getId()), " ", LogUtil.getIdentity(entity), ".");
+		LOGGER.debug("Attaching to #", Integer.valueOf(entity.getId()), " ", LogUtil.getSimpleIdentity(entity), ".");
 		
 		this.entity = entity;
 	}
@@ -48,7 +48,7 @@ public abstract class AbstractComponent implements Component {
 	@Override
 	public void detach() {
 		if (entity != null) {
-			LOGGER.debug("Detaching from #", Integer.valueOf(entity.getId()), " ", LogUtil.getIdentity(entity), ".");
+			LOGGER.debug("Detaching from #", Integer.valueOf(entity.getId()), " ", LogUtil.getSimpleIdentity(entity), ".");
 		}
 		
 		entity = null;

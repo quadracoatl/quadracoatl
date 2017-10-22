@@ -61,7 +61,7 @@ public class ColorComponent extends AbstractComponent {
 	@Override
 	public void updateWith(Component component) {
 		if (component instanceof ColorComponent) {
-			LOGGER.debug("Updating with ", LogUtil.getIdentity(component), ".");
+			LOGGER.debug("Updating with ", LogUtil.getSimpleIdentity(component), ".");
 			
 			Color otherColor = ((ColorComponent)component).color;
 			

@@ -49,7 +49,7 @@ public class SizeComponent extends AbstractComponent {
 	@Override
 	public void updateWith(Component component) {
 		if (component instanceof SizeComponent) {
-			LOGGER.debug("Updating with ", LogUtil.getIdentity(component), ".");
+			LOGGER.debug("Updating with ", LogUtil.getSimpleIdentity(component), ".");
 			
 			Vector3d otherSize = ((SizeComponent)component).size;
 			

@@ -49,7 +49,7 @@ public class LightSourceComponent extends AbstractComponent {
 	@Override
 	public void updateWith(Component component) {
 		if (component instanceof LightSourceComponent) {
-			LOGGER.debug("Updating with ", LogUtil.getIdentity(component), ".");
+			LOGGER.debug("Updating with ", LogUtil.getSimpleIdentity(component), ".");
 			
 			LightSource otherLightSource = ((LightSourceComponent)component).getLightSource();
 			
