@@ -41,13 +41,13 @@ public final class LoggerFactory {
 	 * Gets the {@link Logger} for the given {@link Object}.
 	 * <p>
 	 * The returned {@link Logger} will have the
-	 * {@link LogUtil#getSimpleIdentity(Object)} set as {@link Logger#getName() name}.
+	 * {@link LogUtil#getIdentity(Object)} set as {@link Logger#getName() name}.
 	 * 
 	 * @param instance The {@link Object} for which to get the {@link Logger}.
 	 * @return The {@link Logger} for the given {@link Object}.
 	 */
 	public static final Logger getLogger(Object instance) {
-		return getLogger(LogUtil.getSimpleIdentity(instance));
+		return getLogger(LogUtil.getIdentity(instance));
 	}
 	
 	/**

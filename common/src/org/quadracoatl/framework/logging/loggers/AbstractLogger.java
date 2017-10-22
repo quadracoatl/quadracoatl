@@ -36,6 +36,7 @@ public abstract class AbstractLogger implements Logger {
 	protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 	protected LogLevel logLevel = null;
 	protected String name = null;
+	protected String outputName = null;
 	
 	/**
 	 * Creates a new instance of {@link AbstractLogger}.
@@ -45,7 +46,7 @@ public abstract class AbstractLogger implements Logger {
 	protected AbstractLogger(String name) {
 		super();
 		
-		this.name = name;
+		setName(name);
 	}
 	
 	/**
@@ -140,6 +141,15 @@ public abstract class AbstractLogger implements Logger {
 	@Override
 	public void setName(String name) {
 		this.name = name;
+		this.outputName = name;
+		
+		if (name != null) {
+			int lastDotIndex = name.lastIndexOf('.');
+			
+			if (lastDotIndex >= 0) {
+				outputName = name.substring(lastDotIndex + 1);
+			}
+		}
 	}
 	
 	/**
@@ -231,7 +241,7 @@ public abstract class AbstractLogger implements Logger {
 		logMessage.append("]");
 		
 		if (name != null) {
-			logMessage.append("[").append(name).append("]");
+			logMessage.append("[").append(outputName).append("]");
 		}
 		
 		if (message != null && message.length > 0) {
