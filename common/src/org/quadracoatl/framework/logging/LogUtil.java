@@ -33,9 +33,50 @@ public final class LogUtil {
 	
 	/**
 	 * Gets the identity hashcode of the given {@link Object} as 8-digit
+	 * hex-number with the leading fully qualified classname in the format
+	 * "{@code com.package.class@11223344}". If the given {@link Object} is a
+	 * {@link Class} the fully qualified classname will be returned. If the
+	 * given {@link Object} is {@code null}, {@code "null"} will be returned.
+	 * 
+	 * @param object The {@link Object} whose identity to get.
+	 * @return The identity hashcode of the given {@link Object} as 8-digit
+	 *         hex-number with the leading classname in the format
+	 *         "{@code com.package.class@11223344}", {@code "null"} if the
+	 *         {@link Object} is {@code null}.
+	 */
+	public static final String getIdentity(Object object) {
+		if (object == null) {
+			return "null";
+		}
+		
+		if (object instanceof Class<?>) {
+			return ((Class<?>)object).getName();
+		}
+		
+		return object.getClass().getName()
+				+ "@"
+				+ getIdentityAsHex(object);
+	}
+	
+	/**
+	 * Gets the identity hashcode of the given {@link Object} as 8-digit
+	 * hex-number.
+	 * 
+	 * @param object The {@link Object} for which to get the identity as
+	 *        hex-number.
+	 * @return The identity hashcode of the given {@link Object} as 8-digit
+	 *         hex-number.
+	 */
+	public static final String getIdentityAsHex(Object object) {
+		return String.format("%08x", Integer.valueOf(System.identityHashCode(object)));
+	}
+	
+	/**
+	 * Gets the identity hashcode of the given {@link Object} as 8-digit
 	 * hex-number with the leading simple classname in the format
-	 * "{@code class@11223344}". If the given {@link Object} is {@code null},
-	 * {@code "null"} will be returned.
+	 * "{@code class@11223344}". If the given {@link Object} is a {@link Class}
+	 * the simple classname will be returned. If the given {@link Object} is
+	 * {@code null}, {@code "null"} will be returned.
 	 * 
 	 * @param object The {@link Object} whose identity to get.
 	 * @return The identity hashcode of the given {@link Object} as 8-digit
@@ -54,6 +95,6 @@ public final class LogUtil {
 		
 		return object.getClass().getSimpleName()
 				+ "@"
-				+ String.format("%08x", Integer.valueOf(System.identityHashCode(object)));
+				+ getIdentityAsHex(object);
 	}
 }

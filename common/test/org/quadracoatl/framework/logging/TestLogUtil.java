@@ -26,14 +26,26 @@ import org.junit.Test;
 
 public class TestLogUtil {
 	@Test
-	public void testgetSimpleIdentity() {
-		Assert.assertEquals("getIdentity(null) did not return \"null\".", "null", LogUtil.getSimpleIdentity(null));
+	public void testGetIdentity() {
+		Assert.assertEquals("getIdentity(null) did not return \"null\".", "null", LogUtil.getIdentity(null));
 		
-		Assert.assertEquals("getIdentity(Object.class) did not return \"Object\".", "Object", LogUtil.getSimpleIdentity(Object.class));
-		Assert.assertEquals("getIdentity(HashMap.class) did not return \"HashMap\".", "HashMap", LogUtil.getSimpleIdentity(HashMap.class));
+		Assert.assertEquals("getIdentity(Object.class) did not return \"java.lang.Object\".", "java.lang.Object", LogUtil.getIdentity(Object.class));
+		Assert.assertEquals("getIdentity(HashMap.class) did not return \"java.util.HashMap\".", "java.util.HashMap", LogUtil.getIdentity(HashMap.class));
 		
 		Assert.assertTrue(
 				"getIdentity(new HashMap<Object, Object>) did not return a nice identity string.",
+				LogUtil.getIdentity(new HashMap<Object, Object>()).matches("java\\.util\\.HashMap@[0-9a-f]+"));
+	}
+	
+	@Test
+	public void testGetSimpleIdentity() {
+		Assert.assertEquals("getSimpleIdentity(null) did not return \"null\".", "null", LogUtil.getSimpleIdentity(null));
+		
+		Assert.assertEquals("getSimpleIdentity(Object.class) did not return \"Object\".", "Object", LogUtil.getSimpleIdentity(Object.class));
+		Assert.assertEquals("getSimpleIdentity(HashMap.class) did not return \"HashMap\".", "HashMap", LogUtil.getSimpleIdentity(HashMap.class));
+		
+		Assert.assertTrue(
+				"getSimpleIdentity(new HashMap<Object, Object>) did not return a nice identity string.",
 				LogUtil.getSimpleIdentity(new HashMap<Object, Object>()).matches("HashMap@[0-9a-f]+"));
 	}
 }
