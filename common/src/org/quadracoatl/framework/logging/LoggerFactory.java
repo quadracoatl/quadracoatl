@@ -19,6 +19,10 @@
 
 package org.quadracoatl.framework.logging;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.quadracoatl.framework.logging.providers.NullLoggerProvider;
 import org.quadracoatl.framework.logging.providers.StandardOutLoggerProvider;
 
@@ -29,6 +33,7 @@ import org.quadracoatl.framework.logging.providers.StandardOutLoggerProvider;
 public final class LoggerFactory {
 	private static LoggerProvider loggerProvider = new StandardOutLoggerProvider();
 	private static volatile LogLevel logLevel = LogLevel.ERROR;
+	private static Map<String, LogLevel> logLevels = new HashMap<>();
 	
 	/**
 	 * No instance needed, static utility.
@@ -79,6 +84,29 @@ public final class LoggerFactory {
 	}
 	
 	/**
+	 * Gets the {@link LogLevel} for the given name, returns the global one if
+	 * there is none.
+	 * 
+	 * @param loggerName The name of the logger.
+	 * @return The {@link LogLevel} for the given name.
+	 */
+	public static final LogLevel getLogLevel(String loggerName) {
+		if (loggerName != null) {
+			synchronized (logLevels) {
+				if (!logLevels.isEmpty()) {
+					for (Entry<String, LogLevel> entry : logLevels.entrySet()) {
+						if (loggerName.startsWith(entry.getKey())) {
+							return entry.getValue();
+						}
+					}
+				}
+			}
+		}
+		
+		return logLevel;
+	}
+	
+	/**
 	 * Sets the to be used {@link LoggerProvider}.
 	 * 
 	 * @param loggerProvider The to be used {@link LoggerProvider}. Can be
@@ -105,5 +133,27 @@ public final class LoggerFactory {
 		}
 		
 		LoggerFactory.logLevel = logLevel;
+	}
+	
+	/**
+	 * Sets the {@link LogLevel} for the given package- or classname.
+	 * 
+	 * @param packageName The package- or classname.
+	 * @param logLevel The {@link LogLevel} to set. {@code null} to unset it.
+	 * @throws IllegalArgumentException If the given packagename is {@code null}
+	 *         .
+	 */
+	public static final void setLogLevel(String packageName, LogLevel logLevel) {
+		if (packageName == null) {
+			throw new IllegalArgumentException("The package name cannot be null.");
+		}
+		
+		synchronized (logLevels) {
+			if (logLevel != null) {
+				logLevels.put(packageName, logLevel);
+			} else {
+				logLevels.remove(packageName);
+			}
+		}
 	}
 }

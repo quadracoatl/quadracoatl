@@ -113,7 +113,7 @@ public abstract class AbstractLogger implements Logger {
 		if (logLevel != null) {
 			return logLevel.allows(requestedLogLevel);
 		} else {
-			return LoggerFactory.getLogLevel().allows(requestedLogLevel);
+			return LoggerFactory.getLogLevel(name).allows(requestedLogLevel);
 		}
 	}
 	
