@@ -40,15 +40,31 @@ public class DirectionalArrow extends Geometry {
 		updateDirection(direction);
 	}
 	
+	public DirectionalArrow(AssetManager assetManager, String name, Vector3f location, Vector3f target) {
+		this(assetManager, name, Vector3f.ZERO);
+		
+		updateDirection(location, target);
+	}
+	
 	public void updateDirection(Vector3f direction) {
 		arrow.setArrowExtent(direction);
 		
 		color.x = Math.abs(direction.x);
 		color.y = Math.abs(direction.y);
 		color.z = Math.abs(direction.z);
+		color.normalizeLocal();
 		
 		getMaterial().setVector4("Color", color);
 		
 		updateGeometricState();
+	}
+	
+	public void updateDirection(Vector3f location, Vector3f target) {
+		setLocalTranslation(location);
+		
+		updateDirection(new Vector3f(
+				target.x - location.x,
+				target.y - location.y,
+				target.z - location.z));
 	}
 }
