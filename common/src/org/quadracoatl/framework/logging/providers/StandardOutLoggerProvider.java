@@ -20,14 +20,13 @@
 package org.quadracoatl.framework.logging.providers;
 
 import org.quadracoatl.framework.logging.Logger;
-import org.quadracoatl.framework.logging.LoggerProvider;
 import org.quadracoatl.framework.logging.loggers.StandardOutLogger;
 
 /**
- * A {@link LoggerProvider} implementation which provides the
+ * A {@link AbstractCachingLoggerProvider} extension which provides the
  * {@link StandardOutLogger}.
  */
-public class StandardOutLoggerProvider implements LoggerProvider {
+public class StandardOutLoggerProvider extends AbstractCachingLoggerProvider {
 	/**
 	 * Creates a new instance of {@link StandardOutLoggerProvider}.
 	 */
@@ -39,7 +38,7 @@ public class StandardOutLoggerProvider implements LoggerProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Logger provideLogger(String name) {
+	protected Logger createLogger(String name) {
 		return new StandardOutLogger(name);
 	}
 }
