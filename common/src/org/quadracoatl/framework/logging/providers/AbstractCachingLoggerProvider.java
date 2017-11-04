@@ -71,8 +71,8 @@ public abstract class AbstractCachingLoggerProvider implements LoggerProvider {
 	 * <p>
 	 * This method is only called when there isn't a cached instance available.
 	 * 
-	 * @param name the name.
-	 * @return the {@link Logger} for the given name.
+	 * @param name The name.
+	 * @return The {@link Logger} for the given name.
 	 */
 	protected abstract Logger createLogger(String name);
 }
