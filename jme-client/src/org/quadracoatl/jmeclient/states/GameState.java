@@ -27,7 +27,7 @@ import org.quadracoatl.framework.entities.changes.EntityChangeBatch;
 import org.quadracoatl.framework.entities.changes.EntityChangeProcessor;
 import org.quadracoatl.jmeclient.extensions.JmeResourceManager;
 import org.quadracoatl.jmeclient.states.sub.CelestialState;
-import org.quadracoatl.jmeclient.states.sub.ChunkState;
+import org.quadracoatl.jmeclient.states.sub.ChunkManagingState;
 import org.quadracoatl.jmeclient.states.sub.GameInputState;
 import org.quadracoatl.jmeclient.states.sub.LightingState;
 
@@ -43,7 +43,7 @@ public class GameState extends AbstractManagingAppState {
 		this.clientEnvironment = clientEnvironment;
 		
 		addAppState(new CelestialState(clientEnvironment));
-		addAppState(new ChunkState(clientEnvironment));
+		addAppState(new ChunkManagingState(clientEnvironment));
 		addAppState(new GameInputState(
 				(JmeResourceManager)clientEnvironment.getResourceCache(),
 				clientEnvironment.getCosmos()));
