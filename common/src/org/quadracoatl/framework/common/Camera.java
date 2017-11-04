@@ -7,11 +7,13 @@ public class Camera {
 	protected static final double DEFAULT_ASPECT_RATIO = 16.0d / 9.0d;
 	protected static final double DEFAULT_FOV = 90.0d;
 	protected static final double DEFAULT_VIEW_DISTANCE = 150.0d;
+	// TODO This is needed for debugging, but should not be public.
 	public Vector3d[] pyramidBasePoints = new Vector3d[] {
 			new Vector3d(),
 			new Vector3d(),
 			new Vector3d(),
 			new Vector3d() };
+	// TODO This is needed for debugging, but should not be public.
 	public Vector3d[] pyramidNormals = new Vector3d[] {
 			new Vector3d(),
 			new Vector3d(),
