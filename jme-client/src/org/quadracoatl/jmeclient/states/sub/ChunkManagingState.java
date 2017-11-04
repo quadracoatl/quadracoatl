@@ -57,8 +57,8 @@ public class ChunkManagingState extends AbstractAppState {
 	private TLongObjectMap<ChunkSpatial> chunksToNodes = new TLongObjectHashMap<>();
 	private ClientEnvironment clientEnvironment = null;
 	private BitmapText debugText = null;
-	private final Predicate<Vector3i> IS_INSIDE_VIEWCIRCLE = this::isInsideViewSphere;
 	private final Predicate<Vector3i> IS_INSIDE_VIEWPYRAMID = this::isInsideViewPyramid;
+	private final Predicate<Vector3i> IS_INSIDE_VIEWSPHERE = this::isInsideViewSphere;
 	private Vector3iStack loading = new Vector3iStack();
 	private List<Mesher> meshers = new ArrayList<>();
 	private Vector3iStack meshing = new Vector3iStack();
@@ -172,7 +172,7 @@ public class ChunkManagingState extends AbstractAppState {
 	
 	private void loadChunks() {
 		while (active) {
-			Vector3i forLoading = loading.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWCIRCLE);
+			Vector3i forLoading = loading.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWSPHERE);
 			
 			if (forLoading != null) {
 				loadChunk(forLoading);
@@ -205,7 +205,7 @@ public class ChunkManagingState extends AbstractAppState {
 				}
 			}
 			
-			Vector3i forMeshing = meshing.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWCIRCLE);
+			Vector3i forMeshing = meshing.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWSPHERE);
 			
 			if (forMeshing != null) {
 				meshChunk(forMeshing);
