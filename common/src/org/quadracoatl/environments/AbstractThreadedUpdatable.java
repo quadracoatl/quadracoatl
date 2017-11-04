@@ -25,6 +25,7 @@ import java.util.List;
 import org.quadracoatl.framework.logging.Logger;
 import org.quadracoatl.framework.logging.LoggerFactory;
 import org.quadracoatl.framework.scheduler.Scheduler;
+import org.quadracoatl.framework.support.TraceableThread;
 
 public abstract class AbstractThreadedUpdatable {
 	protected List<Runnable> invokeNext = new ArrayList<>();
@@ -82,8 +83,7 @@ public abstract class AbstractThreadedUpdatable {
 		
 		running = true;
 		
-		thread = new Thread(this::runUpdateLoop);
-		thread.setName(name);
+		thread = new TraceableThread(this::runUpdateLoop, name);
 		thread.start();
 		
 		try {

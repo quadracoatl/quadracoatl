@@ -30,6 +30,7 @@ import org.quadracoatl.framework.common.vectors.Vector3i;
 import org.quadracoatl.framework.common.vectors.Vector3iStack;
 import org.quadracoatl.framework.common.vectors.VectorUtil;
 import org.quadracoatl.framework.realm.Realm;
+import org.quadracoatl.framework.support.TraceableThread;
 import org.quadracoatl.jmeclient.extensions.JmeResourceManager;
 import org.quadracoatl.jmeclient.meshers.DisplacingSimpleMesher;
 import org.quadracoatl.jmeclient.meshers.GreedyMesher;
@@ -102,8 +103,8 @@ public class ChunkManagingState extends AbstractAppState {
 		
 		active = true;
 		
-		new Thread(this::loadChunks, "chunk-loader").start();
-		new Thread(this::meshChunks, "chunk-mesher").start();
+		new TraceableThread(this::loadChunks, "chunk-loader").start();
+		new TraceableThread(this::meshChunks, "chunk-mesher").start();
 		
 		BitmapFont font = app.getAssetManager().loadFont("Interface/Fonts/Console.fnt");
 		
