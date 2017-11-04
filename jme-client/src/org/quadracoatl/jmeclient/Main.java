@@ -38,6 +38,8 @@ public final class Main {
 	}
 	
 	public static final void main(String[] args) {
+		Thread.setDefaultUncaughtExceptionHandler(Main::handleException);
+		
 		Arguments arguments = new Arguments();
 		arguments.addString("game", "../../quadraxample/");
 		arguments.addString("mode", "single");
@@ -75,5 +77,9 @@ public final class Main {
 		QuadracoatlApplication application = new QuadracoatlApplication(arguments.getString("path"), interlayer);
 		application.setSettings(appSettings);
 		application.start(true);
+	}
+	
+	private static final void handleException(Thread thread, Throwable throwable) {
+		LoggerFactory.getLogger(Main.class).log(LogLevel.FATAL, throwable);
 	}
 }
