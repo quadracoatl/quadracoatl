@@ -328,6 +328,7 @@ public class ChunkManagingState extends AbstractAppState {
 				
 				if (chunkSpatial.getParent() == null) {
 					chunksNode.attachChild(chunkSpatial);
+					updateRequired = true;
 				}
 			}
 			
