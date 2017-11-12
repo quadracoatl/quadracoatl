@@ -20,6 +20,7 @@
 package org.quadracoatl.framework.realm;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.quadracoatl.framework.chunk.Chunk;
@@ -115,14 +116,14 @@ public class Realm {
 	}
 	
 	public Chunk getChunk(int indexX, int indexY, int indexZ) {
-		return getChunk(indexX, indexY, indexZ, SpawnBehavior.CREATE);
+		return getChunk(indexX, indexY, indexZ, SpawnBehavior.ANY);
 	}
 	
-	public Chunk getChunk(int indexX, int indexY, int indexZ, SpawnBehavior spawnBehavior) {
+	public Chunk getChunk(int indexX, int indexY, int indexZ, EnumSet<SpawnBehavior> spawnBehavior) {
 		Chunk chunk = chunkManager.get(indexX, indexY, indexZ);
 		
 		if (chunk == null
-				&& spawnBehavior == SpawnBehavior.CREATE
+				&& spawnBehavior.contains(SpawnBehavior.CREATE)
 				&& isInsideBounds(indexX, indexY, indexZ)) {
 			chunk = new Chunk(
 					indexX,

@@ -66,7 +66,7 @@ public class Chunk {
 						index.x + modIndex(x, width),
 						index.y + modIndex(y, height),
 						index.z + modIndex(z, depth),
-						SpawnBehavior.DO_NOT_CREATE);
+						SpawnBehavior.NONE);
 				
 				if (neighbour != null) {
 					return neighbour.get(

@@ -19,6 +19,11 @@
 
 package org.quadracoatl.framework.chunk;
 
+import java.util.EnumSet;
+
 public enum SpawnBehavior {
-	CREATE, DO_NOT_CREATE
+	CREATE;
+	
+	public static final EnumSet<SpawnBehavior> ANY = EnumSet.allOf(SpawnBehavior.class);
+	public static final EnumSet<SpawnBehavior> NONE = EnumSet.noneOf(SpawnBehavior.class);
 }
