@@ -89,27 +89,21 @@ public class Vector3iStack implements Iterable<Vector3i> {
 		synchronized (this) {
 			return popLast();
 		}
-		
 	}
 	
-	public Vector3i pop(Predicate<Vector3i> primaryPredicate, Predicate<Vector3i> secondaryPredicate) {
-		if (list.isEmpty()) {
-			return null;
+	public Vector3i pop(Predicate<Vector3i> predicate) {
+		synchronized (this) {
+			for (int index = list.size() - 1; index >= 0; index--) {
+				Vector3i vector = unpack(list.get(index));
+				
+				if (predicate.test(vector)) {
+					set.remove(list.removeAt(index));
+					return vector;
+				}
+			}
 		}
 		
-		synchronized (this) {
-			Vector3i value = pop(primaryPredicate);
-			
-			if (value == null) {
-				value = pop(secondaryPredicate);
-			}
-			
-			if (value == null) {
-				value = pop();
-			}
-			
-			return value;
-		}
+		return null;
 	}
 	
 	public boolean push(int x, int y, int z) {
@@ -150,21 +144,6 @@ public class Vector3iStack implements Iterable<Vector3i> {
 		VectorUtil.unpackInto(value, cached);
 		
 		return cached;
-	}
-	
-	private Vector3i pop(Predicate<Vector3i> predicate) {
-		synchronized (this) {
-			for (int index = list.size() - 1; index >= 0; index--) {
-				Vector3i vector = unpack(list.get(index));
-				
-				if (predicate.test(vector)) {
-					set.remove(list.removeAt(index));
-					return vector;
-				}
-			}
-		}
-		
-		return null;
 	}
 	
 	private Vector3i popLast() {

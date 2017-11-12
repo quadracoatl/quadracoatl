@@ -173,7 +173,7 @@ public class ChunkManagingState extends AbstractAppState {
 	
 	private void loadChunks() {
 		while (active) {
-			Vector3i forLoading = loading.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWSPHERE);
+			Vector3i forLoading = popFromStack(loading);
 			
 			if (forLoading != null) {
 				loadChunk(forLoading);
@@ -206,7 +206,7 @@ public class ChunkManagingState extends AbstractAppState {
 				}
 			}
 			
-			Vector3i forMeshing = meshing.pop(IS_INSIDE_VIEWPYRAMID, IS_INSIDE_VIEWSPHERE);
+			Vector3i forMeshing = popFromStack(meshing);
 			
 			if (forMeshing != null) {
 				meshChunk(forMeshing);
@@ -216,6 +216,24 @@ public class ChunkManagingState extends AbstractAppState {
 				sleep();
 			}
 		}
+	}
+	
+	private Vector3i popFromStack(Vector3iStack pStack) {
+		if (pStack.isEmpty()) {
+			return null;
+		}
+		
+		Vector3i value = pStack.pop(IS_INSIDE_VIEWPYRAMID);
+		
+		if (value == null) {
+			value = pStack.pop(IS_INSIDE_VIEWSPHERE);
+		}
+		
+		if (value == null) {
+			value = pStack.pop();
+		}
+		
+		return value;
 	}
 	
 	private void queueChunks() {
