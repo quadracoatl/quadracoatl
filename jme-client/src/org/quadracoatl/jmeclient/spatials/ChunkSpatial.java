@@ -92,7 +92,7 @@ public class ChunkSpatial extends Node {
 		return chunk;
 	}
 	
-	public void updateMesh() {
+	public boolean updateMesh() {
 		boolean updateRequired = false;
 		
 		if (!getChildren().isEmpty()) {
@@ -113,5 +113,7 @@ public class ChunkSpatial extends Node {
 		if (updateRequired) {
 			updateGeometricState();
 		}
+		
+		return updateRequired;
 	}
 }
