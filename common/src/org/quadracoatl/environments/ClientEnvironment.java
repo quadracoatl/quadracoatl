@@ -53,7 +53,7 @@ public class ClientEnvironment extends AbstractThreadedUpdatable {
 		cosmos.registerRealm(cosmosPart.getRealm(cosmosPart.getCurrentRealmName()));
 		
 		currentRealm = cosmos.getRealm(cosmosPart.getCurrentRealmName());
-		currentRealm.swapChunkManager(new RingChunkManager(256));
+		currentRealm.swapChunkManager(new RingChunkManager(8192));
 		currentRealm.addChunkProvider(new InterlayerChunkDataProvider(cosmosPart));
 	}
 	

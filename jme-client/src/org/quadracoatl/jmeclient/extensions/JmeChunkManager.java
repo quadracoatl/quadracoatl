@@ -28,7 +28,7 @@ public class JmeChunkManager extends RingChunkManager {
 	private Consumer<Chunk> onRemove = null;
 	
 	public JmeChunkManager(Consumer<Chunk> onRemove) {
-		super(256);
+		super(8192);
 		
 		this.onRemove = onRemove;
 	}
