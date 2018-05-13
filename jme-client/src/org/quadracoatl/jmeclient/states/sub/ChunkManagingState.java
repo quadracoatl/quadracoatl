@@ -25,12 +25,14 @@ import java.util.function.Predicate;
 
 import org.quadracoatl.environments.ClientEnvironment;
 import org.quadracoatl.framework.chunk.Chunk;
+import org.quadracoatl.framework.chunk.managers.SimpleChunkManager;
 import org.quadracoatl.framework.common.Camera;
 import org.quadracoatl.framework.common.vectors.Vector3i;
 import org.quadracoatl.framework.common.vectors.Vector3iStack;
 import org.quadracoatl.framework.common.vectors.VectorUtil;
 import org.quadracoatl.framework.realm.Realm;
 import org.quadracoatl.framework.support.TraceableThread;
+import org.quadracoatl.jmeclient.extensions.JmeChunkManager;
 import org.quadracoatl.jmeclient.extensions.JmeResourceManager;
 import org.quadracoatl.jmeclient.meshers.DisplacingSimpleMesher;
 import org.quadracoatl.jmeclient.meshers.GreedyMesher;
@@ -66,6 +68,7 @@ public class ChunkManagingState extends AbstractAppState {
 	private Vector3iStack ready = new Vector3iStack();
 	private Realm realm = null;
 	private Vector3iStack remeshing = new Vector3iStack();
+	private Vector3iStack remove = new Vector3iStack();
 	private int SLEEP_TIME = 64;
 	
 	public ChunkManagingState(ClientEnvironment clientEnvironment) {
@@ -80,6 +83,8 @@ public class ChunkManagingState extends AbstractAppState {
 		// TODO The realm might change later on.
 		realm = clientEnvironment.getCurrentRealm();
 		initMeshers(realm);
+		
+		clientEnvironment.getCurrentRealm().swapChunkManager(new JmeChunkManager(this::removeChunk));
 	}
 	
 	@Override
@@ -87,6 +92,8 @@ public class ChunkManagingState extends AbstractAppState {
 		super.cleanup();
 		
 		active = false;
+		
+		clientEnvironment.getCurrentRealm().swapChunkManager(new SimpleChunkManager());
 		
 		app.getViewPort().detachScene(chunksNode);
 	}
@@ -292,6 +299,13 @@ public class ChunkManagingState extends AbstractAppState {
 		}
 	}
 	
+	private void removeChunk(Chunk chunk) {
+		remove.push(
+				chunk.getIndexX(),
+				chunk.getIndexY(),
+				chunk.getIndexZ());
+	}
+	
 	private void sleep() {
 		try {
 			Thread.sleep(SLEEP_TIME);
@@ -333,6 +347,23 @@ public class ChunkManagingState extends AbstractAppState {
 			}
 			
 			chunkIndex = ready.pop();
+		}
+		
+		chunkIndex = remove.pop();
+		
+		while (chunkIndex != null) {
+			ChunkSpatial chunkSpatial = null;
+			
+			synchronized (chunksToNodes) {
+				chunkSpatial = chunksToNodes.remove(VectorUtil.pack(chunkIndex));
+			}
+			
+			if (chunkSpatial != null && chunkSpatial.getParent() != null) {
+				chunksNode.detachChild(chunkSpatial);
+				updateRequired = true;
+			}
+			
+			chunkIndex = remove.pop();
 		}
 		
 		if (updateRequired) {

@@ -28,6 +28,7 @@ public class JmeChunkManager extends RingChunkManager {
 	private Consumer<Chunk> onRemove = null;
 	
 	public JmeChunkManager(Consumer<Chunk> onRemove) {
+		// TODO Hardcoded limit here.
 		super(8192);
 		
 		this.onRemove = onRemove;
