@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import org.quadracoatl.framework.chunk.Chunk;
 import org.quadracoatl.framework.chunk.ChunkDataProvider;
-import org.quadracoatl.framework.chunk.managers.RingChunkManager;
 import org.quadracoatl.framework.cosmos.Cosmos;
 import org.quadracoatl.framework.entities.Entity;
 import org.quadracoatl.framework.realm.Realm;
@@ -53,7 +52,6 @@ public class ClientEnvironment extends AbstractThreadedUpdatable {
 		cosmos.registerRealm(cosmosPart.getRealm(cosmosPart.getCurrentRealmName()));
 		
 		currentRealm = cosmos.getRealm(cosmosPart.getCurrentRealmName());
-		currentRealm.swapChunkManager(new RingChunkManager(8192));
 		currentRealm.addChunkProvider(new InterlayerChunkDataProvider(cosmosPart));
 	}
 	
