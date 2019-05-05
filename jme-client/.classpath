@@ -5,10 +5,10 @@
 	<classpathentry kind="lib" path="libs/jme/jme3-core.jar" sourcepath="libs/jme/jme3-core-sources.jar"/>
 	<classpathentry kind="lib" path="libs/jme/jme3-desktop.jar" sourcepath="libs/jme/jme3-desktop-sources.jar"/>
 	<classpathentry kind="lib" path="libs/jme/jme3-effects.jar" sourcepath="libs/jme/jme3-effects-sources.jar"/>
-	<classpathentry kind="lib" path="libs/jme/lwjgl2/jme3-lwjgl.jar"/>
-	<classpathentry kind="lib" path="libs/jme/lwjgl2/lwjgl.jar"/>
-	<classpathentry kind="lib" path="libs/jme/lwjgl2/lwjgl-platform-natives-linux.jar"/>
 	<classpathentry kind="lib" path="/common/libs/trove/trove-3.1a1.jar" sourcepath="/common/libs/trove/trove-3.1a1-src.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/common"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl/lwjgl.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl/jme3-lwjgl.jar" sourcepath="libs/jme/lwjgl/jme3-lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="libs/jme/lwjgl/lwjgl-platform-natives-linux.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
